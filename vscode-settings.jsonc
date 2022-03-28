@@ -1,0 +1,83 @@
+{
+    "settingsSync.ignoredSettings": [
+        "vim.vimrc.path",
+        "-vim.neovimConfigPath",
+        "workbench.colorCustomizations",
+        "java.project.referencedLibraries"
+    ],
+    // Vim changing the statusbar colour produces a perpetural diff :/
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#07b51e",
+        "statusBar.noFolderBackground": "#07b51e",
+        "statusBar.debuggingBackground": "#07b51e",
+        "statusBar.foreground": "#000000",
+        "statusBar.debuggingForeground": "#000000"
+    },
+    
+    // Misc
+    "security.workspace.trust.untrustedFiles": "open",
+    "files.autoSave": "afterDelay",
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "workbench.startupEditor": "none",
+    // Terminal
+    "terminal.integrated.scrollback": 2000,
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    "terminal.integrated.cursorStyle": "line",
+    // Git
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    
+
+    // --- Languages ---
+    // C/C++
+    "C_Cpp.default.intelliSenseMode": "gcc-x86",
+    
+    // Java
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "D:\\Classes\\Useful\\junit-platform-console-standalone-1.7.0-M1.jar",
+    ],
+    "java.debug.settings.showToString": false,
+    
+    // HTML
+    "html.autoClosingTags": false,
+
+
+    // --- Extensions ---
+    // Vim Settings
+    "vim.vimrc.enable": true,
+    "vim.vimrc.path": "D:\\Coding\\dotfiles\\.vimrc",
+    "vim.enableNeovim": true,
+    "vim.highlightedyank.enable": true,
+    "vim.ignorecase": false,
+    "vim.neovimPath": "C:\\Program Files\\Neovim\\bin\\nvim.exe",
+    "vim.showMarksInGutter": true,
+    "vim.statusBarColorControl": true,
+    "vim.statusBarColors.normal": ["#d8ef07", "#000000"],
+    "vim.statusBarColors.insert": ["#0e07ef", "#FFFFFF"],
+    "vim.statusBarColors.replace": ["#ef3107", "#FFFFFF"],
+    "vim.statusBarColors.visual": ["#07b51e", "#000000"],
+    "vim.statusBarColors.visualline": ["#096d0d", "#FFFFFF"],
+    "vim.statusBarColors.visualblock": ["#1a4918", "#FFFFFF"],
+    "vim.statusBarColors.searchinprogressmode": ["#dd11d0", "#FFFFFF"],
+    "vim.statusBarColors.commandlineinprogress": [
+        "#8918a5",
+        "#FFFFFF"
+    ],
+    // Spellcheck 
+    "cSpell.language": "en,en-GB",
+    // TODO
+    "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^[ \\t]*(-|\\d+.))\\s*.+($TAGS)",
+    "todo-tree.general.tags": [
+        "BUG",
+        "HACK",
+        "FIXME",
+        "TODO",
+        "[ ]",
+        "[x]",
+        "NOTE"
+    ],
+    
+}
