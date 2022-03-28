@@ -20,6 +20,7 @@
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
     "workbench.startupEditor": "none",
+    "editor.insertSpaces": false,
     // Terminal
     "terminal.integrated.scrollback": 2000,
     "terminal.integrated.defaultProfile.windows": "Command Prompt",
