@@ -10,10 +10,10 @@
 /*** "This Frame" in context menu ***/
 /* menu#frame,                          /* This Frame    */
 /* #context-showonlythisframe,              /* Show Only This Frame     */
-/* #context-openframeintab,                 /* Open Frame in New Tab    */
+ #context-openframeintab,                 /* Open Frame in New Tab    */
 /* #context-openframe,                      /* Open Frame in New Window */
  #open-frame-sep,                         /******** Separator *********/
- #context-reloadframe,                    /* Reload Frame             */
+/* #context-reloadframe,                    /* Reload Frame             */
  #context-reloadframe + menuseparator,    /******** Separator *********/
  #context-bookmarkframe,                  /* Bookmark This Frame      */
  #context-saveframe,                      /* Save Frame As…           */
