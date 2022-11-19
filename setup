@@ -1,0 +1,18 @@
+#!/bin/bash/
+
+# Install tools
+apt install -y git &
+apt install -y curl &
+apt install -y zsh &
+apt install -y firefox &
+wait
+
+if [[ $SHELL == "*/bash" ]] /bin/zsh $0
+
+# Setup firefox
+	# link userchrome
+ln -s "$PWD/firefox/chrome" "$HOME/.mozilla/firefox/*.default/chrome"
+
+# Gnome settings
+settings set org.gnome.shell.extensions.dash-to-dock show-show-apps-button false
+gsettings set org.gnome.shell.extensions.desktop-icons show-home false
