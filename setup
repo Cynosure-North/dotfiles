@@ -7,12 +7,14 @@ apt install -y zsh &
 apt install -y firefox &
 wait
 
-if [[ $SHELL == "*/bash" ]] /bin/zsh $0
+# Git
+git config --global user.email "cynosure.north@gmail.com"
+git config --global user.name "North"
 
-# Setup firefox
+# Firefox
 	# link userchrome
 ln -s "$PWD/firefox/chrome" "$HOME/.mozilla/firefox/*.default/chrome"
 
-# Gnome settings
+# Gnome
 settings set org.gnome.shell.extensions.dash-to-dock show-show-apps-button false
 gsettings set org.gnome.shell.extensions.desktop-icons show-home false
