@@ -5,6 +5,7 @@ apt install -y git &
 apt install -y curl &
 apt install -y zsh &
 apt install -y firefox &
+apt install -y vlc &
 wait
 
 # Git
