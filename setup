@@ -1,5 +1,7 @@
 #!/bin/bash/
 
+SCRIPT_SOURCE=${0%/*}
+
 # Install tools
 apt install -y git &
 apt install -y curl &
@@ -14,7 +16,10 @@ git config --global user.name "North"
 
 # Firefox
 	# link userchrome
-ln -s "$PWD/firefox/chrome" "$HOME/.mozilla/firefox/*.default/chrome"
+ln -s "$SCRIPT_SOURCE/firefox/chrome" "$HOME/.mozilla/firefox/*.default/chrome"
+
+# ZSH
+ln -s "$SCRIPT_SOURCE/.zshrc" "$HOME/.zshrc"
 
 # Gnome
 settings set org.gnome.shell.extensions.dash-to-dock show-show-apps-button false
