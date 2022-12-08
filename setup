@@ -8,6 +8,7 @@ apt install -y curl &
 apt install -y zsh &
 apt install -y firefox &
 apt install -y vlc &
+apt install -y neovim &
 wait
 
 # Git
@@ -24,3 +25,6 @@ ln -s "$SCRIPT_SOURCE/.zshrc" "$HOME/.zshrc"
 # Gnome
 settings set org.gnome.shell.extensions.dash-to-dock show-show-apps-button false
 gsettings set org.gnome.shell.extensions.desktop-icons show-home false
+
+#Neovim
+ln -s "$SCRIPT_SOURCE/init.vim" "$HOME/.config/nvim/init.vim"
