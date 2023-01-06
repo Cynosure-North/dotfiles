@@ -1,6 +1,5 @@
 /*AGENT_SHEET*/
 
-/************************************/
 /****** simpleMenuWizard START ******/
 
 /**********************************************
@@ -28,17 +27,13 @@
 
 /*** Options ***/
 
-/**********************************************************
-   How to activate or deactivate the following options:
-   Remove '/*' at the beginning of a line (not comment line) to activate the option
-   Add '/*' at the beginning of the line (not comment line) to deactivate the option
-   **********************************************************/
-
 /*** Hide all "Send <item> to Device" entries ***/
-/* @import url("./simpleMenuWizard/opt_noSendToDevice.css");
+ @import url("./simpleMenuWizard/opt_noSendToDevice.css");
 
 /*** Hide all inactive menu items ***/
-/* #mainPopupSet menuitem[disabled="true"][id][data-l10n-id] { display: none !important; }
+ #mainPopupSet menuitem[disabled="true"][id][data-l10n-id] { display: none !important; }
 
 /****** simpleMenuWizard END ******/
-/**********************************/
+
+ #star-button-box { display: none; }
+ #urlbar-input { color: red; }
