@@ -8,8 +8,11 @@ HIST_STAMPS="yyyy-mm-dd"                # Timestamp format
 export MOZ_ENABLE_WAYLAND=1             # Set firefox to use wayland
 export EDITOR=nvim                      # Set neovim as my default text editor
 export LESSHISTFILE=/dev/null           # Stop less creating a history file
+export PATH="$PATH:$HOME/.local/bin"	#Python install dir
 
 alias rm=trash-put                      # Move to trash instead of permantenty deleting
+alias fd=fdfind							# More user friendly search
+alias python=python3					
 
 setopt RC_QUOTES                        # Use '' in quoted strings to insert '
 
