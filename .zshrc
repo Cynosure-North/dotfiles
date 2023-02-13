@@ -13,6 +13,10 @@ export PATH="$PATH:$HOME/.local/bin"	#Python install dir
 alias rm=trash-put                      # Move to trash instead of permantenty deleting
 alias fd=fdfind							# More user friendly search
 alias python=python3					
+alias chromium='chromium --guest --no-default-browser-check'
+alias qmv='qmv -f do'
+
+DATE=$(date +'%Y-%m-%d')
 
 setopt RC_QUOTES                        # Use '' in quoted strings to insert '
 

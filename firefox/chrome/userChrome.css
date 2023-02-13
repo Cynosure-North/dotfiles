@@ -35,4 +35,8 @@
 
 /****** simpleMenuWizard END ******/
 
-#star-button-box, #pageAction-urlbar-_testpilot-containers { display: none; }
+#star-button-box,
+#pageAction-urlbar-_testpilot-containers,
+#pageAction-urlbar-firefox-translations-addon_mozilla_org,
+#_testpilot-containers-menuitem-5,
+{ display: none; }
