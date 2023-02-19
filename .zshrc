@@ -14,7 +14,8 @@ alias rm=trash-put                      # Move to trash instead of permantenty d
 alias fd=fdfind							# More user friendly search
 alias python=python3					
 alias chromium='chromium --guest --no-default-browser-check'
-alias qmv='qmv -f do'
+alias qmv='fdfind . --color=never -t f | qmv'
+alias cvlc='cvlc --play-and-exit'
 
 DATE=$(date +'%Y-%m-%d')
 

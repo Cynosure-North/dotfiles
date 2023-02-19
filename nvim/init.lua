@@ -1,15 +1,20 @@
--- TODO: Something is seriously impacting help performance
---  This is impacting startup performancermagatti/auto-session
-
---Aliases
+-- TODO: startup time
+-- TODO: performance
+-- TODO: diffopt
+-- TODO: Debate mode
+--	- set up splits
+--	- Link them
+--	- Fill with whitespace
+--	- Cursor stays on same line instead of jumping back
+-- TODO: Cursed mode
+-- Aliases
 local opt = vim.opt
-local cmd = vim.cmd
 local api = vim.api
-local fn  = vim.fn
+local cmd = vim.cmd
+local fn = vim.fn
 local g = vim.g
 
-
-function prequire(name)		-- Graceful fallback if packages aren't installed
+function prequire(name)                -- Graceful fallback if packages aren't installed
 	local status, lib = pcall(require, name)
 	if(status) then return lib end
 	-- Return a do nothing object
@@ -43,7 +48,10 @@ opt.mousemodel = "popup_setpos"			-- TODO: customise popup menu
 opt.wrap = false						-- Wrapping, is true in unnamed buffers, .txt, .md, .adoc
 opt.syntax = "on"						-- Syntax highlighting
 opt.spell = true						-- Spellcheck
-display = { "lastline", "uhex", "msgsep" }
+opt.spelloptions = "camel"				-- Split camelCase words for spellchecking
+opt.display = { "lastline", "uhex", "msgsep" }	-- Controls how text is displayed
+opt.cpoptions:remove('_')				-- Fix cw inconsistency
+opt.guifont = "Fira Code"
 -- Folding
 opt.foldmethod = "expr"					-- Use treesitter to determine folding
 opt.foldexpr = "nvim_treesitter#foldexpr()"
@@ -51,8 +59,8 @@ opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.splitright = true					-- New windows on the right
 -- Show indents
 opt.list = true
-opt.listchars = { tab = '│ ', lead = '·', trail = '៖', nbsp = '␣', precedes = '←', extends= '→' }		-- TODO: Colours, use conceal so it hides the ៖ with when typing
-api.nvim_set_hl(0, "Whitespace", { link = "Comment" })
+opt.listchars = { tab = '│ ', lead = '·', trail = '៖', nbsp = '␣', precedes = '←', extends= '→' }		-- TODO: use conceal so it hides the ៖ with when typing
+api.nvim_set_hl(0, "Whitespace", { fg=g.palette_dim_foreground })
 
 
 -- fn.match( "Unicode", "[^\\x00-\\x7F]")					-- Highlight non ascii charactersℚ
@@ -61,10 +69,10 @@ cmd [[ syntax match Unicode '[^\x00-\x7E]' ]]
 api.nvim_set_hl(0, "Unicode", { fg=g.palette_bright_red, bg=g.palette_background }) 
 
 
-cmd [[ syntax match Trailing_Tabs '\S\zs\t\+' ]]
--- api.nvim_set_hl(0, "Traling_Tabs", {fg=g.terminal_color_0, blend=100})
-api.nvim_set_hl(0, "Traling_Tabs", { fg=NONE, bg=NONE })
--- fn.match( "Trailing_Tabs", "\\S\\zs\\t\\+")				-- Only show tabs at the start of the line
+cmd [[ syntax match trailing_tabs '\S\zs\t\+' ]]
+-- api.nvim_set_hl(0, "trailing_tabs", {fg=g.terminal_color_0, blend=100})
+api.nvim_set_hl(0, "trailing_tabs", { fg=NONE, bg=NONE })
+-- fn.match( "trailing_tabs", "\\S\\zs\\t\\+")				-- Only show tabs at the start of the line
 
 cmd [[
 nm <silent> <F1> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
@@ -74,27 +82,37 @@ nm <silent> <F1> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
 ]]
 
 
-fn.match("as", "a")
-api.nvim_set_hl(0, "as", {fg='red'})
+----
+--		Status Line
+----
+api.nvim_set_hl(0, "statusline_normal", { bg=g.palette_bright_foreground, bg=g.palette_dim_background })
+api.nvim_set_hl(0, "statusline_insert", { bg=g.palette_green, bg=g.palette_dim_background })
+api.nvim_set_hl(0, "statusline_visual", { bg=g.palette_bright_blue, bg=g.palette_dim_background })
+api.nvim_set_hl(0, "statusline_replace", { bg=g.palette_bright_red, bg=g.palette_dim_background })
 
--- TODO: Trailing tabs & spaces, except in comments, handle markdown seperately
---			seet :h syn-containedin
--- TODO: hide listchars on cursor line
+-- opt.statusline = ""
+-- opt.statusline:append("%{get(b:,'gitsigns_status','')}")
+
+
+
 
 -- Evilish mode
 opt.virtualedit = "block,onemore"
 opt.selection = "exclusive"
-opt.guicursor = "n-v-c-sm:ver50,i-ci:ver25-Cursor-blinkwait200-blinkon150-blinkoff100,r-cr-o:hor80"
+opt.guicursor = "n-v-c-sm:ver20,i-ci:ver10-Cursor-blinkwait200-blinkon250-blinkoff200,r-cr-o:hor20"	-- TODO
 
 opt.scrolloff = 5						-- Keep cursor 5 rows from the edges
+opt.sidescroll = 1						-- Scroll one column at a time
 opt.sidescrolloff = 5					-- Keep cursor 5 columns from the edges
 
 -- Netrw
 -- g.netrw_keepdir = 1
 -- g.netrw_banner = 0
 -- g.netrw_liststyle = 3
--- g.netrw_localcopydircmd = 'cp -r'
+g.netrw_localcopydircmd = 'cp -r'
+-- TODO: Delete
 g.netrw_list_hide = "\\(^\\|\\s\\s\\)\\zs\\.\\S\\+"		-- Hide dotfiles (gh to toggle)
+g.netrw_browsex_viewer	= "xdg-open"	-- TODO: If it fails it should show up in a hit enter window, not a buffer
 
 
 ----
@@ -103,8 +121,8 @@ g.netrw_list_hide = "\\(^\\|\\s\\s\\)\\zs\\.\\S\\+"		-- Hide dotfiles (gh to tog
 
 api.nvim_create_autocmd( 'TextYankPost',		-- Highlight yanked text
 	{ callback = function() vim.highlight.on_yank({higroup="Visual"}) end })
-api.nvim_create_autocmd( 'CursorHold', 			-- Clear command line automatically
-	{ command = "echon ''" })
+api.nvim_create_autocmd( 'CmdlineLeave', 			-- Clear command line automatically
+	{ callback = function() vim.defer_fn(function() print(' ') end, 1000) end })
 api.nvim_create_autocmd( 'BufWinEnter',			-- Restore cursor position when I open a file
 	{ pattern = "?*", command = "silent! loadview"})
 api.nvim_create_autocmd( {"BufWinLeave", "BufLeave", "BufWritePost", "BufHidden", "QuitPre"},
@@ -118,7 +136,13 @@ api.nvim_create_autocmd( 'BufEnter',			-- Only show column at 80 lines in editab
 		end
 	end })
 api.nvim_create_autocmd( 'BufEnter',			-- Wrap in text files
-{ pattern = {"*.md", "*.adoc", "*.txt" }, callback = function() opt.wrap = true end })
+{ pattern = {"*.md", "*.adoc", "*.txt" }, callback = function()
+	opt.wrap = true
+	opt.list = false
+	opt.linebreak = true
+	opt.colorcolumn = ""
+	-- Also disable xiyaowong/nvim-cursorword
+end })
 
 
 ----
@@ -143,13 +167,13 @@ map("n", "<C-w><C-h>", "<C-w>100h")
 map("n", "<C-w><C-j>", "<C-w>100j")
 map("n", "<C-w><C-k>", "<C-w>100k")
 map("n", "<C-w><C-l>", "<C-w>100l")
--- TODO: Map Shift-Enter to insert newline above in insert mode
+map("n", "<C-w>n", ":vnew<Enter>")
 
 -- Evilish mode
 map("n", "a", "")
 map("n", "A", "")
 map("n", "<C-i>", "A")
-map("", "$", "g$")		-- TODO: wrapped lines
+-- mahttps://duckduckgo.com/?t=ffab&q=vim+echo+cfile&ia=web
 -- map("", "p", function()
 	-- if fn.col(".") == 1 then
 		-- feedkeys("n", "p")
@@ -180,8 +204,6 @@ map('n', "gD", vim.lsp.buf.declaration)
 
 map('n', '<C-/>', function() print('lower') end)
 map('n', '<C-S-/>', function() print('Upper') end)
-
--- TODO: fix cw,dw etc
 
 local comment_map = {
 	toggler = {			-- TODO: Reevaluate mappings
@@ -227,13 +249,25 @@ map("n", "<A-m>", "<Cmd>Beacon<Enter>")
 map("n", "<A-q>", function() toggle_window(
 	function(item) return fn.win_gettype(item.winid) == "quickfix" end,
 	"copen", "cclose") end)
+-- folke/trouble.nvim
+map("n", "<A-t>", "<Cmd>TroubleToggle<Enter>")
 
-
+-- TODO: lsp bindings
 
 
 ----
 --		Scripts
 ----
+
+function alert(msg)		-- TODO
+
+	print("Alert:")
+
+	opt.cursorline = true
+	vim.loop.sleep(100)
+	opt.cursorline = false
+
+end
 
 ----
 --		Languages
@@ -322,7 +356,8 @@ prequire("Comment").setup(comment_map)
 
 -- xiyaowong/nvim-cursorword
 g.cursorword_disable_at_startup = false
-api.nvim_set_hl(0, "CursorWord", { link = "Visual" })		-- Need to make a different color
+api.nvim_set_hl(0, "CursorWord", { underdotted = true, sp=g.palette_foreground })		-- Need to make a different color
+cursorword_disable_filetypes = { "*.md", "*.adoc", "*.txt" }	-- TODO: Not working
 
 -- ggandor/leap.nvim
 prequire('leap').add_default_mappings()
@@ -350,6 +385,15 @@ g.yoinkAutoFormatPaste = 1
 g.yoinkMoveCursorToEndOfPaste = 1
 g.yoinkSwapClampAtEnds = 0
 g.yoinkIncludeNamedRegisters = 0
+
+-- folke/trouble.nvim
+prequire("trouble").setup({
+	icons = false
+	-- action_keys = {} -- TODO
+})
+
+-- DanilaMihailov/beacon.nvim
+g.beacon_minimal_jump = 5
 
 ----
 --		Plugins
@@ -380,27 +424,31 @@ return require("packer").startup(function(use)		-- Install packages
 	use {"nvim-telescope/telescope.nvim",				-- fuzzy finder
 		branch = "0.1.x"}
 	use {'romgrk/fzy-lua-native', run = 'make'}
-	use "simrat39/symbols-outline.nvim"					-- Structure view		TODO: Setup keybindings
-	use "romainl/vim-cool"								-- Disable search highlighting automatically	TODO: Check back, this may be native
+	use "simrat39/symbols-outline.nvim"					-- Structure view		TODO: Setup keybindings		-- TODO: Investigate gO
+	use "romainl/vim-cool"								-- Disable search highlighting automatically	NOTE: Check back, this may be native
 	use "p00f/nvim-ts-rainbow"							-- Rainbow brackets
 	use "norcalli/nvim-colorizer.lua"					-- Highlight colours
 	use "LunarWatcher/auto-pairs"						-- Make inserting brackets nicer
-	use "DanilaMihailov/beacon.nvim"					-- Highlight cursor pos				-- TODO: sometimes doesn't auto highlight
+	use "DanilaMihailov/beacon.nvim"					-- Highlight cursor pos				-- TODO: sometimes doesn't auto highlight. TODO: Maybe just highlight line number on cursor line
 	use "numToStr/Comment.nvim"							-- Comment toggle
 	use "andymass/vim-matchup"							-- Allow words to delimit blocks, e.g. if, fi
 	use "xiyaowong/nvim-cursorword"						-- Highlight matching words
 	-- use "ggandor/leap.nvim"								-- Quick local navigation		-- TODO: Not working
 	-- use "nvim-treesitter/nvim-treesitter-context"		-- Show branch context			-- TODO: Not working
-	use "lukas-reineke/virt-column.nvim"				-- Show character in virtual column
+	use "lukas-reineke/virt-column.nvim"				-- Show character in virtual column	-- TODO: Uses virtual (screen) columns not text columns
 	use "tpope/vim-vinegar"								-- Netrw improvements
 	use "tpope/vim-speeddating"							-- Increment dates
 	use "tpope/vim-characterize"						-- More info with ga
-	use "tpope/vim-abolish"								-- Expand functionality of :s and abbreviations, coerce text	-- TODO: Subvert should have incremental highlighting -- TODO: remap change to s
+	use "arthurxavierx/vim-caser"						-- Coerce case
 	use "kylechui/nvim-surround"						-- Surround with brackets
 	use "rmagatti/auto-session"							-- Automatic session management
 	-- use "svermeulen/vim-cutlass"						-- Make delete actually delete
 	-- use "svermeulen/vim-yoink"							-- Copy history
 	use "wellle/targets.vim"							-- Select brackets easily -- TODO: It would be great to have a treesitter based solution, so it works with fn end etc and comments
+	use "folke/trouble.nvim"							-- List references, quickfix etc	-- TODO
+	use "DanilaMihailov/beacon.nvim"					-- Highlight jumps
+	use "sindrets/diffview.nvim"						-- See all changed files
+	use "lewis6991/gitsigns.nvim"						-- Git integration
 
 	-- keep at the end
 	if packer_bootstrap then		-- If packer was just installed run sync so it installs all the other plugins
