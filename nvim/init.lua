@@ -7,6 +7,12 @@
 --	- Fill with whitespace
 --	- Cursor stays on same line instead of jumping back
 -- TODO: Cursed mode
+-- TODO: Prose more
+--	- Improve spelling
+--	- Thesaurus
+--	- Dictionary Lookup
+--	- Don't correct capitalised words?
+-- TODO: When moving from a split, to a side with 2 splits, go back to the most recently visited one
 -- Aliases
 local opt = vim.opt
 local api = vim.api
@@ -52,6 +58,7 @@ opt.spelloptions = "camel"				-- Split camelCase words for spellchecking
 opt.display = { "lastline", "uhex", "msgsep" }	-- Controls how text is displayed
 opt.cpoptions:remove('_')				-- Fix cw inconsistency
 opt.guifont = "Fira Code"
+opt.showmode = false					-- Hide '-- INSERT --' etc
 -- Folding
 opt.foldmethod = "expr"					-- Use treesitter to determine folding
 opt.foldexpr = "nvim_treesitter#foldexpr()"
@@ -122,7 +129,14 @@ g.netrw_browsex_viewer	= "xdg-open"	-- TODO: If it fails it should show up in a 
 api.nvim_create_autocmd( 'TextYankPost',		-- Highlight yanked text
 	{ callback = function() vim.highlight.on_yank({higroup="Visual"}) end })
 api.nvim_create_autocmd( 'CmdlineLeave', 			-- Clear command line automatically
-	{ callback = function() vim.defer_fn(function() print(' ') end, 1000) end })
+	{ callback = function()	-- NOTE: Unfortunately no way to clear error messages currenntly
+		local cmdline_char = fn.expand("<afile>")	-- Store it because it's empty when deferred
+		vim.defer_fn(function()	
+			if cmdline_char == ':' then 
+				print " " 
+			end
+		end, 2000)
+	end })
 api.nvim_create_autocmd( 'BufWinEnter',			-- Restore cursor position when I open a file
 	{ pattern = "?*", command = "silent! loadview"})
 api.nvim_create_autocmd( {"BufWinLeave", "BufLeave", "BufWritePost", "BufHidden", "QuitPre"},
@@ -258,6 +272,7 @@ map("n", "<A-t>", "<Cmd>TroubleToggle<Enter>")
 ----
 --		Scripts
 ----
+prequire("timer")	-- Basic timer, call with :Timer [time in minutes]
 
 function alert(msg)		-- TODO
 

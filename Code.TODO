@@ -1,0 +1,10 @@
+keybindings
+    - Capslock -> Esc
+    - toggle panels
+    - navigation
+    - Disable cursorline?
+    - Disable relative numbers?
+    - Set status bar color depending on mode
+    - Issue on Lapce? Suggest vim mode have cursor mode
+coerce case
+color scheme
