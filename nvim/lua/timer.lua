@@ -1,3 +1,4 @@
+
 local function tick_down(count, callback)
 	callback(count)
 	if count ~= 0 then
@@ -14,7 +15,6 @@ local function alert()
 end
 
 local function Prep_Timer(opts)
-	alert()
 	local length
 	if opts.args then
 		num = tonumber(opts.args)
@@ -22,8 +22,10 @@ local function Prep_Timer(opts)
 		else length = 30
 		end
 	end
+
+	print(string.format("%d minute timer started. Time now is %s.", length, vim.fn.strftime("%H:%M")))
 	
-	vim.defer_fn(function() print("5 Minutes left") end, (length-5) * 1000 * 60)
+	if length > 5 then vim.defer_fn(function() print("5 Minutes left") end, (length-5) * 1000 * 60) end
 	vim.defer_fn(function() alert() print("Time's Up") end, length * 1000 * 60)
 end
 

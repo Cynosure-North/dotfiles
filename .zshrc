@@ -8,25 +8,25 @@ HIST_STAMPS="yyyy-mm-dd"                # Timestamp format
 export MOZ_ENABLE_WAYLAND=1             # Set firefox to use wayland
 export EDITOR=nvim                      # Set neovim as my default text editor
 export LESSHISTFILE=/dev/null           # Stop less creating a history file
-export PATH="$PATH:$HOME/.local/bin"	#Python install dir
+export PATH="$PATH:$HOME/.local/bin"	# Python install dir
+export DATE=$(date +'%Y-%m-%d')
+export GEM_HOME="$HOME/gems"			# Ruby
+export PATH="$HOME/gems/bin:$PATH"
 
 alias rm=trash-put                      # Move to trash instead of permantenty deleting
 alias fd=fdfind							# More user friendly search
 alias python=python3					
-alias chromium='chromium --guest --no-default-browser-check'
-alias qmv='fdfind . --color=never -t f | qmv'
-alias cvlc='cvlc --play-and-exit'
+alias ,chromium='chromium --guest --no-default-browser-check'
+alias ,qmv='fdfind . --color=never -t f | qmv'
+alias ,vlc='cvlc --play-and-exit --fullscreen --no-video-title'
+alias ,du='du -sh ./*'
 
-DATE=$(date +'%Y-%m-%d')
 
 setopt RC_QUOTES                        # Use '' in quoted strings to insert '
 
 
-
-
 zstyle ':omz:update' mode reminder	# just remind me to update when it's time
 zstyle ':omz:update' frequency 14	# Check every 14 days
-
 
 plugins=(git)
 
