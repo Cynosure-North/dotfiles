@@ -5,10 +5,8 @@
 --	- Cursor stays on same line instead of jumping back
 -- TODO: Cursed mode
 -- TODO: Prose more
---	- Improve spelling
 --	- Thesaurus
 --	- Dictionary Lookup
---	- Don't correct capitalised words?
 -- TODO: When moving from a split, to a side with 2 splits, go back to the most recently visited one
 -- Aliases
 local opt = vim.opt
@@ -66,6 +64,9 @@ opt.list = true
 opt.listchars = { tab = '│ ', lead = '·', trail = '៖', nbsp = '␣', precedes = '←', extends= '→' }		-- TODO: use conceal so it hides the ៖ with when typing
 api.nvim_set_hl(0, "Whitespace", { fg=g.palette_dim_foreground })
 api.nvim_set_hl(0, "EndOfBuffer", { fg=g.palette_dim_background, bg=g.palette_dim_background })		-- hide ~'s
+
+cmd([[syn match AcronymNoSpell "\<\(\u\|\d\)\{3,}s\?\>" contains=@NoSpell]])	-- Don't spellcheck acronyms
+cmd([[syn match UrlNoSpell "\w\+:\/\/\S\+" contains=@NoSpell]])					-- Or URLs
 
 -- Evilish mode
 opt.virtualedit = "block,onemore"
@@ -174,8 +175,8 @@ local function setupWriting()
 	-- Also disable xiyaowong/nvim-cursorword
 end
 api.nvim_create_autocmd( 'BufEnter',			-- Wrap in text files
-{ pattern = {"*.md", "*.adoc", "*.txt" }, callback = setupWriting})
-api.nvim_create_autocmd( 'BufEnter', { pattern = {}, callback = setupWriting})
+{ pattern = {"*.md", "*.adoc", "*.txt", "^$" }, callback = setupWriting})
+
 
 
 ----
