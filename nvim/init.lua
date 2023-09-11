@@ -27,8 +27,7 @@ opt.ignorecase = true					-- Case insensitive searching,
 opt.smartcase = true					--   Unless I use capitals
 -- Tab settings
 opt.tabstop = 4							-- How wide tabs are
-opt.shiftwidth = 0						-- How many spaces >> and << use
-opt.softtabstop = 4
+opt.shiftwidth = 0						-- How many spaces >> and << 
 -- Indentation
 opt.autoindent = true					-- When inserting a newline match indentation
 opt.smartindent = true					-- Insert indents automatically
@@ -40,33 +39,32 @@ opt.wildmode = { "longest", "list:full" }		-- Command line completion
 opt.completeopt = "menuone,longest"		-- Insert mode completion
 -- Colors
 opt.termguicolors = true				-- Truecolor support
-cmd[[colorscheme selenized_bw]]			-- jan-warchol/selenized
+-- cmd[[colorscheme selenized_bw]]			-- jan-warchol/selenized
 opt.background = "dark"					-- Color scheme
 -- Mouse
 opt.mouse = "nv"						-- Mouse support
 opt.mousemodel = "popup_setpos"			-- TODO: customise popup menu
--- Misc
-opt.wrap = false						-- Wrapping, is true in unnamed buffers, .txt, .md, .adoc
-opt.syntax = "on"						-- Syntax highlighting
+-- Spelling
 opt.spell = true						-- Spellcheck
 opt.spelloptions = "camel"				-- Split camelCase words for spellchecking
 opt.spellsuggest:append("10")			-- 10 suggestions max
-opt.display = { "lastline", "uhex", "msgsep" }	-- Controls how text is displayed
-opt.cpoptions:remove('_')				-- Fix cw inconsistency
-opt.guifont = "Fira Code"
 -- Folding
-opt.foldmethod = "expr"					-- Use treesitter to determine folding
-opt.foldexpr = "nvim_treesitter#foldexpr()"
--- Splitting
+opt.foldmethod = "indent"				-- Fold on equal indentation
+-- Misc
+opt.shm:append("I")						-- Disable :intro message
+opt.fillchars:append("eob: ")			-- Hide ~ at end of buffer
+opt.wrap = false						-- Text wrapping, is true in unnamed buffers, .txt, .md, .adoc
+opt.display = { "lastline", "uhex" }	-- Truncate and show hex codes for unprintable characters
+opt.cpoptions:remove('_')				-- Fix cw inconsistency
 opt.splitright = true					-- New windows on the right
 -- Show indents
 opt.list = true
-opt.listchars = { tab = '│ ', lead = '·', trail = '៖', nbsp = '␣', precedes = '←', extends= '→' }		-- TODO: use conceal so it hides the ៖ with when typing
-api.nvim_set_hl(0, "Whitespace", { fg=g.palette_dim_foreground })
-api.nvim_set_hl(0, "EndOfBuffer", { fg=g.palette_dim_background, bg=g.palette_dim_background })		-- hide ~'s
-
+opt.listchars = { tab = '│ ', lead = '·', trail = '៖', nbsp = '␣', precedes = '←', extends= '→' }		-- TODO: use conceal so it hides the ៖ with when typing, TODO: find a way to hide trailing whitespace before comments
+api.nvim_set_hl(0, "Whitespace", { fg = "DarkGray" })
+-- Syntax highlighting
+opt.syntax = "on"						-- Syntax highlighting
 cmd([[syn match AcronymNoSpell "\<\(\u\|\d\)\{3,}s\?\>" contains=@NoSpell]])	-- Don't spellcheck acronyms
-cmd([[syn match UrlNoSpell "\w\+:\/\/\S\+" contains=@NoSpell]])					-- Or URLs
+cmd([[syn match UrlNoSpell "\w\+:\/\/\S\+" contains=@NoSpell]])					-- Or URLs		TODO: Doesn't work in text files
 
 -- Evilish mode
 opt.virtualedit = "block,onemore"
@@ -85,58 +83,6 @@ g.netrw_localcopydircmd = 'cp -r'
 -- TODO: Delete
 g.netrw_list_hide = "\\(^\\|\\s\\s\\)\\zs\\.\\S\\+"		-- Hide dotfiles (gh to toggle)
 g.netrw_browsex_viewer	= "xdg-open"	-- TODO: If it fails it should show up in a hit enter window, not a buffer
-
-----
---		Digraphs
-----
-
-fn.digraph_setlist({
-	{ "sa", 'ₐ' },
-	{ "as", 'ₐ' },
-	{ "se", 'ₑ' },
-	{ "es", 'ₑ' },
-	{ "sh", 'ₕ' },
-	{ "hs", 'ₕ' },
-	{ "si", 'ᵢ' },
-	{ "is", 'ᵢ' },
-	{ "sj", 'ⱼ' },
-	{ "js", 'ⱼ' },
-	{ "sk", 'ₖ' },
-	{ "ks", 'ₖ' },
-	{ "sl", 'ₗ' },
-	{ "ls", 'ₗ' },
-	{ "sm", 'ₘ' },
-	{ "ms", 'ₘ' },
-	{ "sn", 'ₙ' },
-	{ "ns", 'ₙ' },
-	{ "so", 'ₒ' },
-	{ "os", 'ₒ' },
-	{ "sp", 'ₚ' },
-	{ "ps", 'ₚ' },
-	{ "sr", 'ᵣ' },
-	{ "rs", 'ᵣ' },
-	{ "ss", 'ₛ' },
-	{ "ss", 'ₛ' },
-	{ "st", 'ₜ' },
-	{ "ts", 'ₜ' },
-	{ "su", 'ᵤ' },
-	{ "us", 'ᵤ' },
-	{ "sv", 'ᵥ' },
-	{ "vs", 'ᵥ' },
-	{ "sx", 'ₓ' },
-	{ "xs", 'ₓ' },
-	{ "Sn", 'ⁿ' },
-	{ "nS", 'ⁿ' },
-	{ "Sm", 'ᵐ' },
-	{ "mS", 'ᵐ' },
-	{ "Si", 'ⁱ' },
-	{ "iS", 'ⁱ' },
-	{ "Sj", 'ʲ' },
-	{ "jS", 'ʲ' },
-	{ "Sk", 'ᵏ' },
-	{ "kS", 'ᵏ' },
-	{ "-.", '∸' },
-})
 
 
 ----
@@ -175,7 +121,7 @@ local function setupWriting()
 	-- Also disable xiyaowong/nvim-cursorword
 end
 api.nvim_create_autocmd( 'BufEnter',			-- Wrap in text files
-{ pattern = {"*.md", "*.adoc", "*.txt", "^$" }, callback = setupWriting})
+{ pattern = {"*.md", "*.adoc", "*.txt", "{}" }, callback = setupWriting})
 
 
 
@@ -239,52 +185,27 @@ map("n", "<A-m>", "<Cmd>Beacon<Enter>")
 --		Scripts
 ----
 prequire("timer")	-- Basic timer, call with :Timer [time in minutes]
-
-function alert(msg)		-- TODO
-
-	print("Alert:")
-
-	opt.cursorline = true
-	vim.loop.sleep(100)
-	opt.cursorline = false
-
-end
-
+prequire("write")	-- sudo write
 
 ----
 --		Plugin options
 ----
 
--- p00f/nvim-ts-rainbow
-prequire('nvim-treesitter.configs').setup({
-	rainbow = {				-- TODO: Not working
-		enable = true,
-		colors = {
-			g.pallete_bright_red,
-			g.pallete_bright_blue,
-			g.pallete_bright_orange,
-			g.pallete_bright_violet,
-			g.pallete_bright_orange,
-			g.pallete_bright_yellow,
-			-- g.pallete_bright_green,
-			-- g.pallete_bright_cyan,
-		}
-	}
+-- windwp/nvim-autopairs
+prequire("nvim-autopairs").setup({
+	fast_wrap = {},
+})
+local Rule = prequire("nvim-autopairs.rule")
+prequire("nvim-autopairs").add_rules({
+	Rule("{", "};", "nix")
 })
 
-
--- LunarWatcher/auto-pairs
-g.AutoPairsUseInsertedCount = 1
-g.AutoPairsShortcutToggle = ""
-g.AutoPairsShortcutFastWrap = ""
-g.AutoPairsShortcutJump = ""
-g.AutoPairsMapBS = 1
 
 
 -- norcalli/nvim-colorizer.lua
 prequire ("colorizer").setup({
 	"*"
-},{ 
+},{
 	names = false,
 	RRGGBBAA = true
 })
@@ -333,7 +254,7 @@ local packer_bootstrap = ensure_packer()
 return require("packer").startup(function(use)		-- Install packages
 	use "wbthomason/packer.nvim"						-- Let Packer manage itself
 	use "romainl/vim-cool"								-- Disable search highlighting automatically	NOTE: Check back, this may be native
-	use "LunarWatcher/auto-pairs"						-- Make inserting brackets nicer
+	use "windwp/nvim-autopairs"							-- Make inserting brackets nicer
 	use "DanilaMihailov/beacon.nvim"					-- Highlight cursor pos				-- TODO: sometimes doesn't auto highlight. TODO: Maybe just highlight line number on cursor line
 	use "xiyaowong/nvim-cursorword"						-- Highlight matching words
 	use "lukas-reineke/virt-column.nvim"				-- Show character in virtual column	-- TODO: Uses virtual (screen) columns not text columns
