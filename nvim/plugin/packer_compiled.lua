@@ -74,11 +74,6 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  ["auto-pairs"] = {
-    loaded = true,
-    path = "/home/north/.local/share/nvim/site/pack/packer/start/auto-pairs",
-    url = "https://github.com/LunarWatcher/auto-pairs"
-  },
   ["auto-session"] = {
     loaded = true,
     path = "/home/north/.local/share/nvim/site/pack/packer/start/auto-session",
@@ -88,6 +83,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/north/.local/share/nvim/site/pack/packer/start/beacon.nvim",
     url = "https://github.com/DanilaMihailov/beacon.nvim"
+  },
+  ["nvim-autopairs"] = {
+    loaded = true,
+    path = "/home/north/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
+    url = "https://github.com/windwp/nvim-autopairs"
   },
   ["nvim-cursorword"] = {
     loaded = true,

@@ -19,6 +19,7 @@ function prequire(name)                -- Graceful fallback if packages aren't i
 	local status, lib = pcall(require, name)
 	if(status) then return lib end
 	-- Return a do nothing object
+	print("Package " .. name .. " couldn't be loaded")
 	return setmetatable({}, {__index = function() return function() end end})
 end
 
@@ -27,7 +28,7 @@ opt.ignorecase = true					-- Case insensitive searching,
 opt.smartcase = true					--   Unless I use capitals
 -- Tab settings
 opt.tabstop = 4							-- How wide tabs are
-opt.shiftwidth = 0						-- How many spaces >> and << 
+opt.shiftwidth = 4						-- How many spaces >> and << 
 -- Indentation
 opt.autoindent = true					-- When inserting a newline match indentation
 opt.smartindent = true					-- Insert indents automatically
@@ -46,6 +47,7 @@ opt.mouse = "nv"						-- Mouse support
 opt.mousemodel = "popup_setpos"			-- TODO: customise popup menu
 -- Spelling
 opt.spell = true						-- Spellcheck
+-- opt.spelllang = "en_nz"					-- Spell things correctly
 opt.spelloptions = "camel"				-- Split camelCase words for spellchecking
 opt.spellsuggest:append("10")			-- 10 suggestions max
 -- Folding
@@ -185,7 +187,6 @@ map("n", "<A-m>", "<Cmd>Beacon<Enter>")
 --		Scripts
 ----
 prequire("timer")	-- Basic timer, call with :Timer [time in minutes]
-prequire("write")	-- sudo write
 
 ----
 --		Plugin options
@@ -195,23 +196,13 @@ prequire("write")	-- sudo write
 prequire("nvim-autopairs").setup({
 	fast_wrap = {},
 })
-local Rule = prequire("nvim-autopairs.rule")
-prequire("nvim-autopairs").add_rules({
-	Rule("{", "};", "nix")
-})
 
-
-
--- norcalli/nvim-colorizer.lua
-prequire ("colorizer").setup({
-	"*"
-},{
-	names = false,
-	RRGGBBAA = true
-})
 
 -- lukas-reineke/virt-column.nvim
-prequire("virt-column").setup({char = '│'})
+prequire("virt-column").setup({
+	char = '│',
+	highlight = "Whitespace"
+})
 
 -- rmagatti/auto-session
 prequire("auto-session").setup {
@@ -226,12 +217,6 @@ g.yoinkSavePersistently = 1
 g.yoinkAutoFormatPaste = 1
 g.yoinkMoveCursorToEndOfPaste = 1
 g.yoinkIncludeNamedRegisters = 0
-
--- folke/trouble.nvim
-prequire("trouble").setup({
-	icons = false
-	-- action_keys = {} -- TODO
-})
 
 -- DanilaMihailov/beacon.nvim
 g.beacon_minimal_jump = 5

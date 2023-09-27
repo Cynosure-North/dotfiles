@@ -1,0 +1,45 @@
+{
+    // Misc
+    "security.workspace.trust.untrustedFiles": "open",
+    "files.autoSave": "afterDelay",
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "workbench.startupEditor": "none",
+    "editor.insertSpaces": false,
+    // Terminal
+    "terminal.integrated.scrollback": 2000,
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    "terminal.integrated.cursorStyle": "line",
+    // Git
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    
+
+    // HTML
+    "html.autoClosingTags": false,
+
+
+    // --- Extensions ---
+    // TODO
+    "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^[ \\t]*(-|\\d+.))\\s*.+($TAGS)",
+    "todo-tree.general.tags": [
+        "BUG",
+        "HACK",
+        "FIXME",
+        "TODO",
+        "[ ]",
+        "[x]",
+        "NOTE"
+    ],
+    
+
+    // Nvim
+    "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
+    "window.titleBarStyle": "custom",
+    "zenMode.centerLayout": false,
+    "zenMode.hideLineNumbers": false,
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+}

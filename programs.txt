@@ -1,0 +1,32 @@
+zsh	
+nvim
+vlc
+rclone (+ cronjob)
+jq
+python
+moreutils
+firefox
+	login to sync
+	link userchrome
+	config
+		uidensity
+		legacy userprofile customisation
+qbittorrent
+	ln -s $HOME/Coding/dotfiles/qBittorrent.conf $HOME/.config/qBittorrent/qBittorrent.conf
+gnome-console
+gnome-extensions
+	auto select headset
+	no A11y (if using big text mode)
+vscodium
+	link settings
+	link keybindings
+	link extensions
+Gnome	# TODO: Gsettings
+	power button behaviour
+	Touchpad tap to click
+	Map ctrl+alt+T to open console
+	Dark theme
+Ripgrep
+fdfind
+
+Swap caps and esc

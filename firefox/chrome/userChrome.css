@@ -8,6 +8,7 @@
 		margin-top: calc(0px - var(--tab-min-height) - var(--tab-block-margin)) !important;
 		height: calc(var(--tab-min-height) + var(--tab-block-margin) * 1px);
 		top: calc(0px - var(--tab-block-margin));
+		--nav-width: calc(100% + 65px);
 	}
 }
 
@@ -228,6 +229,7 @@ toolbarspring,								/* Toolbar spacers */
 #urlbar-go-button,							/* Search/goto button in url bar (Pointless)*/
 #blocked-permissions-container,				/* No camera etc. Still shows the switch dropdown */
 #downloads-button,							/* Downloads popup & Button */
+#home-button,
 
 
 /* * * *
@@ -245,6 +247,7 @@ toolbarspring,								/* Toolbar spacers */
 #context-sep-screenshots,
 #context-viewsource,
 #context-inspect-a11y,
+#context-media-eme-separator,
 
 /* On link */
 #context-openlinkinusercontext-menu,
@@ -253,7 +256,6 @@ toolbarspring,								/* Toolbar spacers */
 #context-savelinktopocket,
 #context-sendlinktodevice,
 #context-sep-open,
-#context-searchselect,
 #frame-sep,
 
 /* Highlighted Text */
@@ -309,7 +311,10 @@ toolbarspring,								/* Toolbar spacers */
 .unified-extensions-context-menu-remove-extension,
 .unified-extensions-context-menu-report-extension,
 
-#_testpilot-containers-menuitem-5,		/* Multi Account Containers */
+/* Misc extensions */
+#_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root, 		/* Bitwarden */
+#_testpilot-containers-menuitem-5,								/* Multi Account Containers */
+#ublock0_raymondhill_net-menuitem-_uBlock0-blockElement,		/* uBlock - block element */
 
 
 #dummy
