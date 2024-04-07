@@ -1,3 +1,3 @@
-/VSCode/**
-/!VSCode/!keybindings.json
-/!VSCode/!settings.josn
+VSCode/*
+!VSCode/settings.json
+!VSCode/keybindings.json
