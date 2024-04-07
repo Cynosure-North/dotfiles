@@ -1,32 +1,41 @@
 :root {
-	--NavbarWidth: 43; /*  Default values: 36 - 43  */
+	--NavbarWidth: 43; /* How wide the non-tab section is */
+
 	--dark-theme-background: rgb(11,11,11) !important; /* Darker background in reader mode */
+	--toolbar-start-end-padding: 3px !important;
+}
+
+@media screen and (max-width:849px) {	/* Two row layout */
+	/* No clue what the 2px is from, but it's needed for symmetry */
+	#urlbar[breakout-extend] { width: calc(100vw - 2 * var(--urlbar-margin-inline) + 2 * var(--urlbar-container-padding)) !important; }
 }
 
 @media screen and (min-width:850px) {    /* One row layout */
-	:root #nav-bar {
+	#nav-bar {
 		margin-top: calc(0px - var(--tab-min-height) - var(--tab-block-margin)) !important;
 		height: calc(var(--tab-min-height) + var(--tab-block-margin) * 1px);
 		top: calc(0px - var(--tab-block-margin));
-		--nav-width: calc(100% + 65px);
 	}
-}
 
-@media screen and (min-width:1325px) {    /* Only the tabs space will grow from here */
-	#TabsToolbar { margin-left: calc(1325px / 100 * var(--NavbarWidth)) !important; }
-
-	#nav-bar {
-		margin-right: calc(100vw - calc(1325px / 100 * var(--NavbarWidth))) !important;
-		--nav-width: calc(1325px / 100 * var(--NavbarWidth) - 4 * var(--urlbar-container-padding));
+	#urlbar-container { 
+		flex-basis: 0 !important;
+		margin-inline: 0 !important;
 	}
-}
 
-@media screen and (min-width:850px) and (max-width:1324px) {    /* Both the tabs space and the navbar will grow */
-	#TabsToolbar { margin-left: calc(var(--NavbarWidth) * 1vw) !important; }
+	@media screen and (min-width:850px) and (max-width:1324px) {    /* Both the tabs space and the navbar will grow */
+		#TabsToolbar { margin-left: calc(var(--NavbarWidth) * 1vw) !important; }
 
-	#nav-bar {
-		margin-right: calc(100vw - calc(var(--NavbarWidth) * 1vw)) !important;
-		--nav-width: calc(var(--NavbarWidth) * 1vw - 4 * var(--urlbar-margin-inline));
+		#nav-bar { margin-right: calc(100vw - var(--NavbarWidth) * 1vw) !important; }
+
+		#urlbar[breakout-extend] { width: calc(var(--NavbarWidth) * 1vw - var(--urlbar-margin-inline)) !important; }
+	}
+
+	@media screen and (min-width:1325px) {    /* Only the tabs space will grow from here */
+		#TabsToolbar { margin-left: calc(1325px / 100 * var(--NavbarWidth)) !important; }
+
+		#nav-bar { margin-right: calc(100vw - calc(1325px / 100 * var(--NavbarWidth))) !important; }
+
+		#urlbar[breakout-extend] { width: calc(1325px / 100 * var(--NavbarWidth) - var(--urlbar-margin-inline)) !important; }
 	}
 }
 
@@ -163,11 +172,9 @@
 	border: none !important;
 	box-shadow: none !important;
 }
-#urlbar[breakout-extend] {
-	width: var(--nav-width) !important;
-	left: -65px !important;		/* NOTE: just looked good. May not scale on high DPI monitors */
-}
-#urlbar[breakout-extend] > #urlbar-background{ background-color: Field !important; }
+#urlbar[breakout-extend] { left: -65px !important; }	/* NOTE: just looked good. May not scale */
+#urlbar[breakout-extend] > #urlbar-background { background-color: Field !important; }
+
 #urlbar[breakout-extend] #tracking-protection-icon-container,
 #urlbar[breakout-extend] #identity-box {
 	display: none !important;
@@ -191,7 +198,8 @@
 /* Search with X */
 #urlbar-input::placeholder { opacity: 0 !important; }
 
-/* Drag windows TODO */
+/* Drag windows */
+/* toolbarbutton { -moz-window-dragging: drag; } */
 
 .urlbar-input-box,#urlbar-input,#urlbar-scheme,#urlbar-container{
 	-moz-window-dragging: drag;
@@ -205,9 +213,9 @@
 	cursor: auto;
 }
 
-/* #firefox-view-button,
-#tracking-protection-icon-container, */
-.search-panel-one-offs-header.search-panel-header,	/* 'This time search with' */
+/* #tracking-protection-icon-container, */
+#firefox-view-button,
+.search-panel-one-offs-header,				/* 'This time search with' */
 #urlbar-anon-search-settings, 						/* Settings in the search box */
 #private-browsing-indicator-with-label,		/* Private label */
 toolbarbutton#scrollbutton-up,				/* Scroll indicators when the window is too narrow */
@@ -230,6 +238,7 @@ toolbarspring,								/* Toolbar spacers */
 #blocked-permissions-container,				/* No camera etc. Still shows the switch dropdown */
 #downloads-button,							/* Downloads popup & Button */
 #home-button,
+#pageActionButton,							/* Add to container dropdown */
 
 
 /* * * *
@@ -314,6 +323,7 @@ toolbarspring,								/* Toolbar spacers */
 /* Misc extensions */
 #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root, 		/* Bitwarden */
 #_testpilot-containers-menuitem-5,								/* Multi Account Containers */
+#_testpilot-containers-menuitem-20,
 #ublock0_raymondhill_net-menuitem-_uBlock0-blockElement,		/* uBlock - block element */
 
 

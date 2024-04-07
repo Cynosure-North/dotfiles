@@ -74,6 +74,11 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["HighStr.nvim"] = {
+    loaded = true,
+    path = "/home/north/.local/share/nvim/site/pack/packer/start/HighStr.nvim",
+    url = "https://github.com/Pocco81/HighStr.nvim"
+  },
   ["auto-session"] = {
     loaded = true,
     path = "/home/north/.local/share/nvim/site/pack/packer/start/auto-session",

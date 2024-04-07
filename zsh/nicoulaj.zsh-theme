@@ -30,7 +30,7 @@ autoload -Uz vcs_info
 add-zsh-hook precmd vcs_info
 
 # Set vcs_info parameters.
-zstyle ':vcs_info:*' enable hg bzr git
+zstyle ':vcs_info:*' enable hg svn git
 zstyle ':vcs_info:*:*' check-for-changes true # Can be slow on big repos.
 zstyle ':vcs_info:*:*' unstagedstr '!'
 zstyle ':vcs_info:*:*' stagedstr '+'

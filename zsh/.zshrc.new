@@ -1,0 +1,50 @@
+export ZSH="$HOME/.config/zsh"
+export ZSH_CACHE="$HOME/.cache/zsh"
+if [ ! -d $ZSH_CACHE ]
+then
+	mkdir -p $ZSH_CACHE
+fi
+
+setopt RC_QUOTES                        # Use '' in quoted strings to insert '
+
+[[ -z "$LS_COLORS" ]] || zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
+#TODO:
+# colours off
+# prompt has no colour
+# ^w goes to spaces
+# tab name not set
+# Key Bindings
+
+autoload -U compinit && compinit
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
+#source $HOME/.oh-my-zsh/oh-my-zsh.sh
+source $ZSH/nicoulaj.zsh-theme
+
+export ZSH_COMPDUMP=$ZSH_CACHE/zcompdump
+export HISTFILE=$ZSH_CACHE/zsh_history
+export HISTSIZE=10000					# How much to load into memory
+export SAVEHIST=10000					# How many to write to file
+setopt extended_history					# record timestamp of command in HISTFILE
+setopt hist_expire_dups_first			# delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_dups					# ignore duplicated commands history list
+setopt hist_ignore_space				# ignore commands that start with space
+setopt hist_verify						# show command with history expansion to user before running it
+setopt share_history					# share command history data
+setopt hist_find_no_dups				# History won't show duplicates on search.
+
+export EDITOR=nvim
+export PAGER=less
+export LESSHISTFILE=/dev/null           # Stop less creating a history file
+
+export DATE=$(date +'%Y-%m-%d')
+
+alias bc='bc -q'
+alias dl='trash'
+alias rm="echo 'use trash (dl) "
+alias chromium='chromium --guest --no-default-browser-check'
+alias qmv='fd . --color=never -t f | qmv'
+alias vlc='cvlc --play-and-exit --fullscreen --no-video-title --mouse-hide-timeout 1 --stereo-mode 1'
+alias du='du -sh ./*'
+alias _='sudo '			# We'll see how this goes

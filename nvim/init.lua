@@ -1,8 +1,3 @@
--- TODO: Debate mode
---	- set up splits
---	- Link them
---	- Fill with whitespace
---	- Cursor stays on same line instead of jumping back
 -- TODO: Cursed mode
 -- TODO: Prose more
 --	- Thesaurus
@@ -123,9 +118,7 @@ local function setupWriting()
 	-- Also disable xiyaowong/nvim-cursorword
 end
 api.nvim_create_autocmd( 'BufEnter',			-- Wrap in text files
-{ pattern = {"*.md", "*.adoc", "*.txt", "{}" }, callback = setupWriting})
-
-
+{ pattern = {"*.md", "*.adoc", "*.txt", "{}"}, callback = setupWriting})
 
 ----
 --		Mappings
@@ -177,6 +170,169 @@ map("", "<C-y>", "")
 map("i", "<Esc>", "<Esc>l")
 
 
+fn.digraph_setlist({
+	{ "sa", 'ₐ' },
+	{ "as", 'ₐ' },
+	{ "se", 'ₑ' },
+	{ "es", 'ₑ' },
+	{ "sh", 'ₕ' },
+	{ "hs", 'ₕ' },
+	{ "si", 'ᵢ' },
+	{ "is", 'ᵢ' },
+	{ "sj", 'ⱼ' },
+	{ "js", 'ⱼ' },
+	{ "sk", 'ₖ' },
+	{ "ks", 'ₖ' },
+	{ "sl", 'ₗ' },
+	{ "ls", 'ₗ' },
+	{ "sm", 'ₘ' },
+	{ "ms", 'ₘ' },
+	{ "sn", 'ₙ' },
+	{ "ns", 'ₙ' },
+	{ "so", 'ₒ' },
+	{ "os", 'ₒ' },
+	{ "sp", 'ₚ' },
+	{ "ps", 'ₚ' },
+	{ "sr", 'ᵣ' },
+	{ "rs", 'ᵣ' },
+	{ "ss", 'ₛ' },
+	{ "ss", 'ₛ' },
+	{ "st", 'ₜ' },
+	{ "ts", 'ₜ' },
+	{ "su", 'ᵤ' },
+	{ "us", 'ᵤ' },
+	{ "sv", 'ᵥ' },
+	{ "vs", 'ᵥ' },
+	{ "sx", 'ₓ' },
+	{ "xs", 'ₓ' },
+	{ "Sa", 'ᵃ' },
+	{ "Sa", 'ᵃ' },
+	{ "Sb", 'ᵇ' },
+	{ "bS", 'ᵇ' },
+	{ "Sc", 'ᶜ' },
+	{ "cS", 'ᶜ' },
+	{ "Sd", 'ᵈ' },
+	{ "dS", 'ᵈ' },
+	{ "Se", 'ᵉ' },
+	{ "eS", 'ᵉ' },
+	{ "Sf", 'ᶠ' },
+	{ "fS", 'ᶠ' },
+	{ "Sg", 'ᵍ' },
+	{ "gS", 'ᵍ' },
+	{ "Sh", 'ʰ' },
+	{ "hS", 'ʰ' },
+	{ "Si", 'ⁱ' },
+	{ "iS", 'ⁱ' },
+	{ "Sj", 'ʲ' },
+	{ "jS", 'ʲ' },
+	{ "Sk", 'ᵏ' },
+	{ "kS", 'ᵏ' },
+	{ "Sl", 'ˡ' },
+	{ "lS", 'ˡ' },
+	{ "Sm", 'ᵐ' },
+	{ "mS", 'ᵐ' },
+	{ "Sn", 'ⁿ' },
+	{ "nS", 'ⁿ' },
+	{ "So", 'ᵒ' },
+	{ "oS", 'ᵒ' },
+	{ "Sp", 'ᵖ' },
+	{ "pS", 'ᵖ' },
+	{ "Sq", '𐞥' },
+	{ "qS", '𐞥' },
+	{ "Sr", 'ʳ' },
+	{ "rS", 'ʳ' },
+	{ "Ss", 'ˢ' },
+	{ "sS", 'ˢ' },
+	{ "St", 'ᵗ' },
+	{ "tS", 'ᵗ' },
+	{ "Su", 'ᵘ' },
+	{ "uS", 'ᵘ' },
+	{ "Sv", 'ᵛ' },
+	{ "vS", 'ᵛ' },
+	{ "Sw", 'ʷ' },
+	{ "wS", 'ʷ' },
+	{ "Sx", 'ˣ' },
+	{ "xS", 'ˣ' },
+	{ "Sy", 'ʸ' },
+	{ "yS", 'ʸ' },
+	{ "Sz", 'ᶻ' },
+	{ "zS", 'ᶻ' },
+	{ "SA", 'ᴬ' },
+	{ "AS", 'ᴬ' },
+	{ "SB", 'ᴮ' },
+	{ "BS", 'ᴮ' },
+	{ "SC", 'ꟲ' },
+	{ "CS", 'ꟲ' },
+	{ "SD", 'ᴰ' },
+	{ "DS", 'ᴰ' },
+	{ "SE", 'ᴱ' },
+	{ "ES", 'ᴱ' },
+	{ "SF", 'ꟳ' },
+	{ "FS", 'ꟳ' },
+	{ "SG", 'ᴳ' },
+	{ "GS", 'ᴳ' },
+	{ "SH", 'ᴴ' },
+	{ "HS", 'ᴴ' },
+	{ "SI", 'ᴵ' },
+	{ "IS", 'ᴵ' },
+	{ "SJ", 'ᴶ' },
+	{ "JS", 'ᴶ' },
+	{ "SK", 'ᴷ' },
+	{ "KS", 'ᴷ' },
+	{ "SL", 'ᴸ' },
+	{ "LS", 'ᴸ' },
+	{ "SM", 'ᴹ' },
+	{ "MS", 'ᴹ' },
+	{ "SN", 'ᴺ' },
+	{ "NS", 'ᴺ' },
+	{ "SO", 'ᴼ' },
+	{ "OS", 'ᴼ' },
+	{ "SP", 'ᴾ' },
+	{ "PS", 'ᴾ' },
+	{ "SQ", 'ꟴ' },
+	{ "QS", 'ꟴ' },
+	{ "SR", 'ᴿ' },
+	{ "RS", 'ᴿ' },
+	{ "ST", 'ᵀ' },
+	{ "TS", 'ᵀ' },
+	{ "SU", 'ᵁ' },
+	{ "US", 'ᵁ' },
+	{ "SV", 'ⱽ' },
+	{ "VS", 'ⱽ' },
+	{ "SW", 'ᵂ' },
+	{ "WS", 'ᵂ' },
+	{ "S0", '⁰' },
+	{ "0S", '⁰' },
+	{ "S1", '¹' },
+	{ "1S", '¹' },
+	{ "S2", '²' },
+	{ "2S", '²' },
+	{ "S3", '³' },
+	{ "3S", '³' },
+	{ "S4", '⁴' },
+	{ "4S", '⁴' },
+	{ "S5", '⁵' },
+	{ "5S", '⁵' },
+	{ "S6", '⁶' },
+	{ "6S", '⁶' },
+	{ "S7", '⁷' },
+	{ "7S", '⁷' },
+	{ "S8", '⁸' },
+	{ "8S", '⁸' },
+	{ "S9", '⁹' },
+	{ "9S", '⁹' },
+	{ "S+", '⁺' },
+	{ "+S", '⁺' },
+	{ "S-", '⁻' },
+	{ "-S", '⁻' },
+	{ "S=", '⁼' },
+	{ "=S", '⁼' },
+	{ "S(", '⁽' },
+	{ "(S", '⁽' },
+	{ "S)", '⁾' }
+})
+
+
 -- simrat39/symbols-outline.nvim
 map("n", "<A-b>", "<Cmd>SymbolsOutline<Enter>")
 -- DanilaMihailov/beacon.nvim
@@ -187,6 +343,7 @@ map("n", "<A-m>", "<Cmd>Beacon<Enter>")
 --		Scripts
 ----
 prequire("timer")	-- Basic timer, call with :Timer [time in minutes]
+prequire("debate")	-- Settings for adjing
 
 ----
 --		Plugin options
@@ -221,6 +378,14 @@ g.yoinkIncludeNamedRegisters = 0
 -- DanilaMihailov/beacon.nvim
 g.beacon_minimal_jump = 5
 
+
+----
+--		VSCode
+----
+if vim.g.vscode then
+	opt.spell = false
+end
+
 ----
 --		Plugins
 ----
@@ -232,9 +397,7 @@ local ensure_packer = function()		-- Bootstrap Packer
 	end
 	return false
 end
-
 local packer_bootstrap = ensure_packer()
-
 
 return require("packer").startup(function(use)		-- Install packages
 	use "wbthomason/packer.nvim"						-- Let Packer manage itself
@@ -249,6 +412,7 @@ return require("packer").startup(function(use)		-- Install packages
 	use "rmagatti/auto-session"							-- Automatic session management
 	use "svermeulen/vim-cutlass"						-- Make delete actually delete
 	use "svermeulen/vim-yoink"							-- Copy history
+	use "Pocco81/HighStr.nvim"							-- Highlight text
 
 	-- keep at the end
 	if packer_bootstrap then		-- If packer was just installed run sync so it installs all the other plugins

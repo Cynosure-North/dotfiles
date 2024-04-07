@@ -28,5 +28,7 @@ Gnome	# TODO: Gsettings
 	Dark theme
 Ripgrep
 fdfind
+krita
+Discord
 
 Swap caps and esc
