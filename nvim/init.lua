@@ -4,11 +4,14 @@
 --	- Dictionary Lookup
 -- TODO: When moving from a split, to a side with 2 splits, go back to the most recently visited one
 -- Aliases
+-- Incrimental search colors - highlight cursor/current match
+-- Don't spellcheck capitalised acronyms
 local opt = vim.opt
 local api = vim.api
 local cmd = vim.cmd
 local fn = vim.fn
 local g = vim.g
+
 
 function prequire(name)                -- Graceful fallback if packages aren't installed
 	local status, lib = pcall(require, name)
@@ -23,7 +26,7 @@ opt.ignorecase = true					-- Case insensitive searching,
 opt.smartcase = true					--   Unless I use capitals
 -- Tab settings
 opt.tabstop = 4							-- How wide tabs are
-opt.shiftwidth = 4						-- How many spaces >> and << 
+opt.shiftwidth = 4						-- How many spaces >> and <<
 -- Indentation
 opt.autoindent = true					-- When inserting a newline match indentation
 opt.smartindent = true					-- Insert indents automatically
@@ -36,7 +39,7 @@ opt.completeopt = "menuone,longest"		-- Insert mode completion
 -- Colors
 opt.termguicolors = true				-- Truecolor support
 -- cmd[[colorscheme selenized_bw]]			-- jan-warchol/selenized
-opt.background = "dark"					-- Color scheme
+--opt.background = "dark"					-- Color scheme
 -- Mouse
 opt.mouse = "nv"						-- Mouse support
 opt.mousemodel = "popup_setpos"			-- TODO: customise popup menu
@@ -59,7 +62,6 @@ opt.list = true
 opt.listchars = { tab = '│ ', lead = '·', trail = '៖', nbsp = '␣', precedes = '←', extends= '→' }		-- TODO: use conceal so it hides the ៖ with when typing, TODO: find a way to hide trailing whitespace before comments
 api.nvim_set_hl(0, "Whitespace", { fg = "DarkGray" })
 -- Syntax highlighting
-opt.syntax = "on"						-- Syntax highlighting
 cmd([[syn match AcronymNoSpell "\<\(\u\|\d\)\{3,}s\?\>" contains=@NoSpell]])	-- Don't spellcheck acronyms
 cmd([[syn match UrlNoSpell "\w\+:\/\/\S\+" contains=@NoSpell]])					-- Or URLs		TODO: Doesn't work in text files
 
@@ -138,13 +140,24 @@ map("", "x", "d")
 map("n", "xx", "dd")
 map("v", "X", "D")
 map("n", "s", "ch")
-map("n", "<C-w><C-h>", "<C-w>100h")
+map("n", "<C-w><C-h>", "<C-w>100h")		-- Hold ctrl to jump to the end
 map("n", "<C-w><C-j>", "<C-w>100j")
 map("n", "<C-w><C-k>", "<C-w>100k")
 map("n", "<C-w><C-l>", "<C-w>100l")
+map("i", "<A-h>", "<Esc><C-w>ha")
+map("i", "<A-j>", "<Esc><C-w>ja")
+map("i", "<A-k>", "<Esc><C-w>ka")
+map("i", "<A-l>", "<Esc><C-w>la")
+map("n", "<A-h>", "<Esc><C-w>h")
+map("n", "<A-j>", "<Esc><C-w>j")
+map("n", "<A-k>", "<Esc><C-w>k")
+map("n", "<A-l>", "<Esc><C-w>l")
 map("n", "<C-w>n", ":vnew<Enter>")
 map("", "j", "gj")
 map("", "k", "gk")
+map("n", "q:", "")	-- Disable command line window (:<C-f> still works)
+map("n", "q/", "")
+map("n", "q?", "")
 
 
 -- Evilish mode
@@ -343,7 +356,7 @@ map("n", "<A-m>", "<Cmd>Beacon<Enter>")
 --		Scripts
 ----
 prequire("timer")	-- Basic timer, call with :Timer [time in minutes]
-prequire("debate")	-- Settings for adjing
+require("debate")	-- Settings for adjing
 
 ----
 --		Plugin options
@@ -382,7 +395,7 @@ g.beacon_minimal_jump = 5
 ----
 --		VSCode
 ----
-if vim.g.vscode then
+if g.vscode then
 	opt.spell = false
 end
 
@@ -404,15 +417,12 @@ return require("packer").startup(function(use)		-- Install packages
 	use "romainl/vim-cool"								-- Disable search highlighting automatically	NOTE: Check back, this may be native
 	use "windwp/nvim-autopairs"							-- Make inserting brackets nicer
 	use "DanilaMihailov/beacon.nvim"					-- Highlight cursor pos				-- TODO: sometimes doesn't auto highlight. TODO: Maybe just highlight line number on cursor line
-	use "xiyaowong/nvim-cursorword"						-- Highlight matching words
-	use "lukas-reineke/virt-column.nvim"				-- Show character in virtual column	-- TODO: Uses virtual (screen) columns not text columns
+	use "lukas-reineke/virt-column.nvim"				-- Show character in virtual column
 	use "tpope/vim-vinegar"								-- Netrw improvements
-	use "tpope/vim-speeddating"							-- Increment dates
 	use "tpope/vim-characterize"						-- More info with ga
 	use "rmagatti/auto-session"							-- Automatic session management
 	use "svermeulen/vim-cutlass"						-- Make delete actually delete
 	use "svermeulen/vim-yoink"							-- Copy history
-	use "Pocco81/HighStr.nvim"							-- Highlight text
 
 	-- keep at the end
 	if packer_bootstrap then		-- If packer was just installed run sync so it installs all the other plugins
