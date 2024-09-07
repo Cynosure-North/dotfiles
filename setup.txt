@@ -1,0 +1,49 @@
+zsh	
+nvim 		ln -s $HOME/Coding/dotfiles/nvim $HOME/.config/nvim
+vlc
+rclone (+ cronjob)
+jq
+python
+moreutils
+firefox
+	login to sync
+	link userchrome
+qbittorrent		ln -s $HOME/Coding/dotfiles/qBittorrent.conf $HOME/.config/qBittorrent/qBittorrent.conf
+gnome-console
+	gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ next-tab '<Primary>Tab'
+	gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ prev-tab '<Primary><Shift>Tab'
+vscodium
+	link settings
+	link keybindings
+	link extensions
+Ripgrep
+fd-find
+krita
+trash-cli
+git
+	config ssh, username, email
+keyd
+	https://github.com/rvaiya/keydz
+	sudo ln -s $HOME/Coding/dotfiles/keyd /etc/keyd
+
+Gnome	# TODO: Gsettings
+	power button behaviour
+	Touchpad tap to click
+	Mappings
+		Terminal
+		Browser
+		Explorer
+		Music?
+		Videos?
+	Dark theme
+	Remap switch windows to alt+tab, switch applications to super+tab
+	disable auto dimming, idle dimming
+	set large text
+	login automatically
+
+gnome-extensions https://extensions.gnome.org/local/
+	https://extensions.gnome.org/extension/3928/auto-select-headset/
+	no A11y (if using big text mode)
+	disable logo
+	https://extensions.gnome.org/extension/6195/hide-the-dock-in-overview/
+	https://github.com/sidevesh/gnome-gesture-improvements--transpiled

@@ -29,13 +29,14 @@ setopt multios							# enable redirect to multiple streams: echo >file1 >file2
 setopt long_list_jobs					# show long list format job notifications
 setopt interactivecomments 				# recognize comments
 setopt rc_quotes						# Use '' in quoted strings to insert '
+setopt noclobber
 setopt auto_pushd
 setopt pushd_ignore_dups
 setopt pushd_minus
 
 # Preserve dirstack
 DIRSTACKSIZE=10		# ZSH config
-DIRSTACKFILE=$ZSH/dirstack
+DIRSTACKFILE=$HOME/.dirstack
 if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then		# If the dirstack file exists, and dirstack has size 0
 	dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )						# load it ( the (f) means split on whitespace (characters defined in $IFS)
 	[[ -d $dirstack[1] ]] && cd $dirstack[1] && cd $OLDPWD		# Preload #OLDPWD. Arrays are 1 indexed??
@@ -44,7 +45,7 @@ elif [[ ! -f $DIRSTACKFILE ]]; then
 fi
 
 function chpwd() {
-	print -l $PWD ${(u)dirstack}> $DIRSTACKFILE
+	print -l $PWD ${(u)dirstack} >! $DIRSTACKFILE
 }
 
 source $ZSH/oh-my-zsh.sh
