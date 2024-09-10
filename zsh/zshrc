@@ -1,0 +1,83 @@
+export ZSH_CACHE="$HOME/.cache/zsh"
+[[ ! -d $ZSH_CACHE ]] && mkdir -p $ZSH_CACHE
+
+export ZSH_COMPDUMP=$ZSH_CACHE/zcompdump
+
+#
+#	History
+#
+export HISTFILE=$ZSH_CACHE/zsh_history
+export HISTSIZE=50_000					# How much to load into memory
+export SAVEHIST=$HISTSIZE				# How many to write to file
+
+setopt extended_history					# record timestamp of command in HISTFILE
+setopt hist_expire_dups_first			# delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_dups					# ignore duplicated commands history list
+setopt hist_find_no_dups				# Histhttps://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/lib/termsupport.zshory won't showhttps://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/lib/termsupport.zsh duplicates on search.
+setopt hist_ignore_space				# ignore commands that start with space
+setopt hist_verify						# show command with history expansion to user before running it
+setopt share_history					# share command history data
+
+#
+#	Dirstack
+#
+DIRSTACKSIZE=10		# tell ZSH to save 10 entries
+DIRSTACKFILE=$ZSH_CACHE/dirstack
+[[ ! -f $DIRSTACKFILE ]] && touch $DIRSTACKFILE
+setopt auto_pushd			# Automatically add folders to dirstack on cd
+setopt pushd_ignore_dups
+setopt pushd_minus			# Swap '+' & '-'
+
+# Save dirstack on exit
+function zshexit() {
+	print -l $PWD ${(u)dirstack} >! $DIRSTACKFILE
+}
+# And load it on startup
+dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )						# load it ( the (f) means split on whitespace (characters defined in $IFS)
+[[ -d $dirstack[1] ]] && cd $dirstack[1] && cd $OLDPWD		# Preload #OLDPWD. Arrays are 1 indexed??
+
+
+
+
+setopt multios							# enable redirect to multiple streams: echo >file1 >file2
+setopt long_list_jobs					# show long list format job notifications
+setopt interactivecomments				# recognize comments
+setopt rc_quotes						# Use '' in quoted strings to insert '
+setopt noclobber						# '>' fails if the file exists, use '>!' to always overwrite
+
+export EDITOR=nvim
+export PAGER=less
+export LESSHISTFILE=/dev/null           # Stop less creating a history file
+
+
+export DATE=$(date +'%Y-%m-%d')
+
+alias bc='bc -q'
+alias dl='trash'
+alias rm="echo 'use trash (dl) "
+alias chromium='chromium --guest --no-default-browser-check'
+alias qmv='fd . --color=never -t f | qmv'
+alias vlc='cvlc --play-and-exit --fullscreen --no-video-title --mouse-hide-timeout 1 --stereo-mode 1'
+alias du='du -sh ./*'
+alias hist='fc -il'
+alias dirs='echo ${"$(\dirs -v)"[@]:4}'		# Don't show current dir
+alias _='sudo '			# We'll see how this goes
+
+autoload -Uz bracketed-paste-magic		# Maybe can remove
+zle -N bracketed-paste bracketed-paste-magic
+
+alias cp='nocorrect cp'
+alias man='nocorrect man'
+alias mkdir='nocorrect mkdir'
+alias mv='nocorrect mv'
+alias sudo='nocorrect sudo'
+alias su='nocorrect su'
+
+setopt correct_all
+
+
+
+source "$HOME/Coding/dotfiles/zsh/theme.zsh"
+source "$HOME/Coding/dotfiles/zsh/completion.zsh"
+source "$HOME/Coding/dotfiles/zsh/keybindings.zsh"
+source "$HOME/Coding/dotfiles/zsh/tab-names.zsh"

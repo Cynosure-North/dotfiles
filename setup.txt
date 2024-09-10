@@ -1,11 +1,15 @@
-zsh	
+mkdir "$HOME"/Coding
+zsh			ln -s $HOME/Coding/dotfiles/zsh/zshrc $HOME/.zshrc
 nvim 		ln -s $HOME/Coding/dotfiles/nvim $HOME/.config/nvim
 vlc
+kid3
+docker
 rclone
 	# Crontab
 	0 * * * * rclone sync $HOME/Music GDrive:Music
 	10 * * * * rclone sync $HOME/Documents GDrive:Documents
 	20 * * * * rclone sync $HOME/Downloads GDrive:Downloads
+Syncthing
 python
 moreutils
 firefox
@@ -43,6 +47,7 @@ Gnome
 	disable auto dimming, idle dimming
 	set large text
 	login automatically
+	disable multimedia>hot corner
 
 gnome-extensions https://extensions.gnome.org/local/
 	https://extensions.gnome.org/extension/3928/auto-select-headset/
@@ -50,3 +55,4 @@ gnome-extensions https://extensions.gnome.org/local/
 	disable logo
 	https://extensions.gnome.org/extension/6195/hide-the-dock-in-overview/
 	https://github.com/sidevesh/gnome-gesture-improvements--transpiled
+	https://extensions.gnome.org/extension/4099/no-overview/
