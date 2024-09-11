@@ -1,12 +1,26 @@
-export ZSH_CACHE="$HOME/.cache/zsh"
+ZSH_CACHE="$HOME/.cache/zsh"
 [[ ! -d $ZSH_CACHE ]] && mkdir -p $ZSH_CACHE
 
-export ZSH_COMPDUMP=$ZSH_CACHE/zcompdump
+#
+#	Completion	(more in completions file later)
+#
+export ZCOMPDUMP=$ZSH_CACHE/completion_dump
+autoload -U compinit zrecompile && compinit "$ZCOMPDUMP"\.zwc # "$ZSH_COMPDUMP"
+# Use caching so that commands like apt and dpkg complete are useable
+zstyle ':completion:*' use-cache yes
+zstyle ':completion:*' cache-path $ZSH_CACHE_DIR
+
+{
+	# Compile zcompdump, if modified, to increase startup speed
+	if [[ -s "$ZCOMPDUMP" && (! -s "${ZCOMPDUMP}.zwc" || "$ZCOMPDUMP" -nt "${ZCOMPDUMP}.zwc") ]]; then
+		zrecompile "$zcompdump"
+	fi
+} &!
 
 #
 #	History
 #
-export HISTFILE=$ZSH_CACHE/zsh_history
+export HISTFILE=$ZSH_CACHE/history
 export HISTSIZE=50_000					# How much to load into memory
 export SAVEHIST=$HISTSIZE				# How many to write to file
 
@@ -74,7 +88,6 @@ alias sudo='nocorrect sudo'
 alias su='nocorrect su'
 
 setopt correct_all
-
 
 
 source "$HOME/Coding/dotfiles/zsh/theme.zsh"
