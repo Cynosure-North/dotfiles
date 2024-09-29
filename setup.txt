@@ -14,6 +14,7 @@ python
 moreutils
 firefox
 	link userchrome
+	enable extensions in private windows
 qbittorrent		ln -s $HOME/Coding/dotfiles/qBittorrent.conf $HOME/.config/qBittorrent/qBittorrent.conf
 gnome-console
 	gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ next-tab '<Primary>Tab'

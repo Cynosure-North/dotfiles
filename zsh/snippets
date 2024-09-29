@@ -1,0 +1,2 @@
+find . -name "*.flac" -exec ffmpeg -i {} -ab 160k -map_metadata 0 -id3v2_version 3 {}.mp3 \;		# Flac to mp3
+\vlc --recursive expand --random ~/Music		# Random music
