@@ -166,7 +166,8 @@ html:has(:is(
 	#appMenu-popup:hover,
 	#unified-extensions-panel:hover,
 	#protections-popup:hover,
-	#identity-popup:hover))
+	#identity-popup:hover,
+	#permissions-popup:hover))
 { --toolbar-button-vis: flex !important; }
 
 #PanelUI-button,
@@ -176,9 +177,9 @@ html:has(:is(
 	#stop-reload-button,
 	#unified-extensions-button,
 	#tracking-protection-icon-container,
-	#identity-permission-box)
+	#identity-permission-box[hasPermissions])
 {
-	display: var(--toolbar-button-vis);
+	display: var(--toolbar-button-vis) !important;
 }
 
 
