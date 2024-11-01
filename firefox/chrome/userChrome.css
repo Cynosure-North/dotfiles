@@ -157,6 +157,32 @@
 
 
 /* * * *
+ * Hide the buttons normally
+ * * * */
+
+html { --toolbar-button-vis: flex; }
+html:has(toolbar#nav-bar:not(:hover)) { --toolbar-button-vis: none; }
+html:has(:is(
+	#appMenu-popup:hover,
+	#unified-extensions-panel:hover,
+	#protections-popup:hover,
+	#identity-popup:hover))
+{ --toolbar-button-vis: flex !important; }
+
+#PanelUI-button,
+#nav-bar-customization-target :is(
+	#forward-button,
+	#back-button,
+	#stop-reload-button,
+	#unified-extensions-button,
+	#tracking-protection-icon-container,
+	#identity-permission-box)
+{
+	display: var(--toolbar-button-vis);
+}
+
+
+/* * * *
  * Misc
  * * * */
 
@@ -213,21 +239,6 @@ tabs#tabbrowser-tabs { border: none !important }
 #urlbar-container:focus-within :is(.urlbar-input-box,#urlbar-input,#urlbar-scheme,#urlbar-container){
 	-moz-window-dragging: no-drag;
 	cursor: auto;
-}
-
-html { --toolbar-button-vis: flex; }
-html:has(:is(#unified-extensions-panel, #protections-popup:hover)) { --toolbar-button-vis: flex !important; }
-html:has(toolbar#nav-bar:not(:hover)) { --toolbar-button-vis: none; }
-#PanelUI-button,
-#nav-bar-customization-target :is(
-	#forward-button,
-	#back-button,
-	#stop-reload-button,
-	#unified-extensions-button,
-	#tracking-protection-icon-container,
-	#identity-permission-box)
-{
-	display: var(--toolbar-button-vis);
 }
 
 /* #tracking-protection-icon-container, */
