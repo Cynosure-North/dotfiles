@@ -1,26 +1,25 @@
-ZSH_CACHE="$HOME/.cache/zsh"
-[[ ! -d $ZSH_CACHE ]] && mkdir -p $ZSH_CACHE
+ZDOTDIR="$HOME/.cache/zsh"
+[[ ! -d $ZDOTDIR ]] && mkdir -p $ZSH_CACHE
 
 #
 #	Completion	(more in completions file later)
 #
-export ZCOMPDUMP=$ZSH_CACHE/completion_dump
-autoload -U compinit zrecompile && compinit "$ZCOMPDUMP"\.zwc # "$ZSH_COMPDUMP"
+ZCOMPDUMP=$ZDOTDIR/zcompdump
+autoload -U compinit && compinit # -d "$ZCOMPDUMP"\.zwc # "$ZCOMPDUMP"
 # Use caching so that commands like apt and dpkg complete are useable
 zstyle ':completion:*' use-cache yes
-zstyle ':completion:*' cache-path $ZSH_CACHE_DIR
 
 {
 	# Compile zcompdump, if modified, to increase startup speed
 	if [[ -s "$ZCOMPDUMP" && (! -s "${ZCOMPDUMP}.zwc" || "$ZCOMPDUMP" -nt "${ZCOMPDUMP}.zwc") ]]; then
-		zrecompile "$zcompdump"
+		autoload -U zrecompile && zrecompile "$zcompdump"
 	fi
 } &!
 
 #
 #	History
 #
-export HISTFILE=$ZSH_CACHE/history
+export HISTFILE=$ZDOTDIR/history
 export HISTSIZE=50_000					# How much to load into memory
 export SAVEHIST=$HISTSIZE				# How many to write to file
 
@@ -36,7 +35,7 @@ setopt share_history					# share command history data
 #	Dirstack
 #
 DIRSTACKSIZE=10		# tell ZSH to save 10 entries
-DIRSTACKFILE=$ZSH_CACHE/dirstack
+DIRSTACKFILE=$ZDOTDIR/dirstack
 [[ ! -f $DIRSTACKFILE ]] && touch $DIRSTACKFILE
 setopt auto_pushd			# Automatically add folders to dirstack on cd
 setopt pushd_ignore_dups
@@ -44,7 +43,7 @@ setopt pushd_minus			# Swap '+' & '-'
 
 # Save dirstack on exit
 function zshexit() {
-	print -l $PWD ${(u)dirstack} >! $DIRSTACKFILE
+	print -l ${(u)dirstack} >! $DIRSTACKFILE
 }
 # And load it on startup
 dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )						# load it ( the (f) means split on whitespace (characters defined in $IFS)
@@ -74,7 +73,10 @@ alias qmv='fd . --color=never -t f | qmv'
 alias vlc='cvlc --play-and-exit --fullscreen --no-video-title --mouse-hide-timeout 1 --stereo-mode 1'
 alias du='du -sh ./*'
 alias hist='fc -il'
-alias dirs='echo ${"$(\dirs -v)"[@]:4}'		# Don't show current dir
+
+alias cpy=wl-copy
+alias pst=wl-paste
+alias opn=xdg-open
 alias _='sudo '			# We'll see how this goes
 
 autoload -Uz bracketed-paste-magic		# Maybe can remove
@@ -94,3 +96,6 @@ source "$HOME/Coding/dotfiles/zsh/theme.zsh"
 source "$HOME/Coding/dotfiles/zsh/completion.zsh"
 source "$HOME/Coding/dotfiles/zsh/keybindings.zsh"
 source "$HOME/Coding/dotfiles/zsh/tab-names.zsh"
+
+#TODO
+# Don't add home folder to dirstack

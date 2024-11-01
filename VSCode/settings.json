@@ -49,5 +49,5 @@
     "editor.minimap.renderCharacters": false,
     "editor.renderWhitespace": "all",
     "gitlens.ai.experimental.generateCommitMessage.enabled": false,
-    "aws.telemetry": false,
+	"aws.telemetry": false,
 }

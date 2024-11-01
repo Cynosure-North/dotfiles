@@ -20,9 +20,10 @@ gnome-console
 	gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ next-tab '<Primary>Tab'
 	gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ prev-tab '<Primary><Shift>Tab'
 vscodium
-	link settings
-	link keybindings
 	link extensions
+	ln -s $HOME/Coding/dotfiles/VSCode/settings.json $HOME/.config/VSCodium/User/settings.json
+	ln -s $HOME/Coding/dotfiles/VSCode/keybindings.json $HOME/.config/VSCodium/User/keybindings.json
+
 Ripgrep
 fd-find
 krita
@@ -39,6 +40,8 @@ git
 keyd
 	https://github.com/rvaiya/keydz
 	sudo ln -s $HOME/Coding/dotfiles/keyd /etc/keyd
+picard
+	sudo dnf install chromaprint-tools
 
 Gnome
 	power button behaviour
@@ -48,7 +51,8 @@ Gnome
 	disable auto dimming, idle dimming
 	set large text
 	login automatically
-	disable multimedia>hot corner
+	disable Settings>multimedia>hot corner
+	disable Settings>notifications>Characters
 
 gnome-extensions https://extensions.gnome.org/local/
 	https://extensions.gnome.org/extension/3928/auto-select-headset/
@@ -57,3 +61,7 @@ gnome-extensions https://extensions.gnome.org/local/
 	https://extensions.gnome.org/extension/6195/hide-the-dock-in-overview/
 	https://github.com/sidevesh/gnome-gesture-improvements--transpiled
 	https://extensions.gnome.org/extension/4099/no-overview/
+
+Codecs		https://rpmfusion.org/Howto/Multimedia
+	sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+	sudo dnf swap ffmpeg-free ffmpeg --allowerasing
