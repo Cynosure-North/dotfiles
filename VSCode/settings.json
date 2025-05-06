@@ -14,12 +14,8 @@
     "git.enableSmartCommit": true,
     "git.confirmSync": false,
     "git.autofetch": true,
-    
-
     // HTML
     "html.autoClosingTags": false,
-
-
     // --- Extensions ---
     // TODO
     "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^[ \\t]*(-|\\d+.))\\s*.+($TAGS)",
@@ -30,10 +26,9 @@
         "TODO",
         "[ ]",
         "[x]",
-        "NOTE"
+        "NOTE",
+        "todo!()"
     ],
-    
-
     // Nvim
     "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
     "window.titleBarStyle": "custom",
@@ -49,5 +44,56 @@
     "editor.minimap.renderCharacters": false,
     "editor.renderWhitespace": "all",
     "gitlens.ai.experimental.generateCommitMessage.enabled": false,
-	"aws.telemetry": false,
+    "aws.telemetry": false,
+    // gitlens
+    "gitlens.views.scm.grouped.views": {
+        "commits": false,
+        "branches": false,
+        "remotes": false,
+        "stashes": false,
+        "tags": false,
+        "worktrees": false,
+        "contributors": false,
+        "repositories": false,
+        "searchAndCompare": false,
+        "launchpad": false
+    },
+    "gitlens.advanced.abbreviateShaOnCopy": true,
+    "gitlens.showWhatsNewAfterUpgrades": false,
+    "gitlens.plusFeatures.enabled": false,
+    "gitlens.hovers.avatars": false,
+    "zenMode.showTabs": "none",
+    "window.customTitleBarVisibility": "windowed",
+    "workbench.layoutControl.enabled": false,
+    "editor.cursorSurroundingLines": 10,
+    "editor.cursorSurroundingLinesStyle": "all",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.suggest.selectionMode": "whenQuickSuggestion",
+    "window.autoDetectColorScheme": true,
+    "workbench.navigationControl.enabled": false,
+    "window.commandCenter": false,
+    "latex-utilities.message.update.show": false,
+    "cSpell.language": "en,en-AU",
+    // Copilot
+    "chat.commandCenter.enabled": false,
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false,
+        "latex": false,
+    },
+    "[rust]": {
+        "editor.formatOnSave": false // Rustfmt sucks
+    },
+    "editor.acceptSuggestionOnCommitCharacter": false,
+    "gitlens.codeLens.authors.enabled": false,
+    "gitlens.codeLens.enabled": false,
+    "rust-analyzer.lens.enable": false,
+    "latex-workshop.formatting.latex": "latexindent",
+    "latex-utilities.message.error.show": false,
+    "latex-workshop.message.error.show": false,
+    "rust-analyzer.initializeStopped": true,
+    "python.terminal.activateEnvironment": false,
 }

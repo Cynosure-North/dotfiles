@@ -59,10 +59,6 @@
 		"when": "editorTextFocus && !gitlens:disabled && config.gitlens.keymap == 'chorded'"
 	},
 	{
-		"key": "ctrl+shift+c",
-		"command": "todo-tree-view.focus"
-	},
-	{
 		"key": "shift+alt+p",
 		"command": "asciidoc.showPreview",
 		"when": "editorLangId == 'asciidoc'"
@@ -81,5 +77,195 @@
 		"key": "ctrl+shift+v",
 		"command": "-markdown.showPreview",
 		"when": "!notebookEditorFocused && editorLangId == 'markdown'"
+	},
+	{
+		"key": "tab",
+		"command": "-editor.action.inlineSuggest.commit",
+		"when": "inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || cursorAtInlineEdit && inlineEditIsVisible && !editor.hasSelection && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || cursorAtInlineEdit && inlineEditIsVisible && inlineSuggestionVisible && !editor.hasSelection && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible"
+	},
+	{
+		"key": "tab",
+		"command": "selectNextSuggestion",
+		"when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
+	},
+	{
+		"key": "down",
+		"command": "-selectNextSuggestion",
+		"when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
+	},
+	{
+		"key": "shift+tab",
+		"command": "selectPrevSuggestion",
+		"when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
+	},
+	{
+		"key": "up",
+		"command": "-selectPrevSuggestion",
+		"when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
+	},
+	{
+		"key": "ctrl+shift+g",
+		"command": "-workbench.action.terminal.openDetectedLink",
+		"when": "accessibleViewIsShown && terminalHasBeenCreated && accessibleViewCurrentProviderId == 'terminal'"
+	},
+	{
+		"key": "ctrl+shift+g /",
+		"command": "-gitlens.gitCommands",
+		"when": "!gitlens:disabled && config.gitlens.keymap == 'chorded'"
+	},
+	{
+		"key": "ctrl+shift+g .",
+		"command": "-gitlens.diffWithNext",
+		"when": "editorTextFocus && gitlens:enabled && !isInDiffEditor && config.gitlens.keymap == 'chorded' && resourceScheme =~ /^(gitlens|git|pr)$/"
+	},
+	{
+		"key": "ctrl+shift+g .",
+		"command": "-gitlens.diffWithNextInDiffLeft",
+		"when": "editorTextFocus && gitlens:enabled && isInDiffEditor && !isInDiffRightEditor && config.gitlens.keymap == 'chorded' && resourceScheme =~ /^(gitlens|git|pr)$/"
+	},
+	{
+		"key": "ctrl+shift+g .",
+		"command": "-gitlens.diffWithNextInDiffRight",
+		"when": "editorTextFocus && gitlens:enabled && isInDiffRightEditor && config.gitlens.keymap == 'chorded' && resourceScheme =~ /^(gitlens|git|pr)$/"
+	},
+	{
+		"key": "ctrl+shift+g ,",
+		"command": "-gitlens.diffWithPrevious",
+		"when": "editorTextFocus && !isInDiffEditor && config.gitlens.keymap == 'chorded' && resource in 'gitlens:tabs:tracked'"
+	},
+	{
+		"key": "ctrl+shift+g ,",
+		"command": "-gitlens.diffWithPreviousInDiffLeft",
+		"when": "editorTextFocus && isInDiffEditor && !isInDiffRightEditor && config.gitlens.keymap == 'chorded' && resource in 'gitlens:tabs:tracked'"
+	},
+	{
+		"key": "ctrl+shift+g ,",
+		"command": "-gitlens.diffWithPreviousInDiffRight",
+		"when": "editorTextFocus && isInDiffRightEditor && config.gitlens.keymap == 'chorded' && resource in 'gitlens:tabs:tracked'"
+	},
+	{
+		"key": "ctrl+shift+g shift+[IntlBackslash]",
+		"command": "-gitlens.diffWithWorking",
+		"when": "editorTextFocus && gitlens:enabled && config.gitlens.keymap == 'chorded' && resourceScheme =~ /^(gitlens|git|pr)$/"
+	},
+	{
+		"key": "ctrl+shift+g shift+.",
+		"command": "-gitlens.diffWithWorking",
+		"when": "editorTextFocus && gitlens:enabled && config.gitlens.keymap == 'chorded' && resourceScheme =~ /^(gitlens|git|pr)$/"
+	},
+	{
+		"key": "ctrl+shift+g [IntlBackslash]",
+		"command": "-gitlens.diffLineWithPrevious",
+		"when": "editorTextFocus && config.gitlens.keymap == 'chorded' && resource in 'gitlens:tabs:tracked'"
+	},
+	{
+		"key": "ctrl+shift+g shift+,",
+		"command": "-gitlens.diffLineWithPrevious",
+		"when": "editorTextFocus && config.gitlens.keymap == 'chorded' && resource in 'gitlens:tabs:tracked'"
+	},
+	{
+		"key": "ctrl+shift+g shift+h",
+		"command": "-gitlens.showQuickRepoHistory",
+		"when": "!gitlens:disabled && config.gitlens.keymap == 'chorded'"
+	},
+	{
+		"key": "ctrl+shift+g h",
+		"command": "-gitlens.showQuickFileHistory",
+		"when": "!gitlens:disabled && config.gitlens.keymap == 'chorded'"
+	},
+	{
+		"key": "ctrl+shift+g s",
+		"command": "-gitlens.showQuickRepoStatus",
+		"when": "!gitlens:disabled && config.gitlens.keymap == 'chorded'"
+	},
+	{
+		"key": "ctrl+shift+g b",
+		"command": "-gitlens.toggleFileBlame",
+		"when": "editorTextFocus && config.gitlens.keymap == 'chorded' && resource in 'gitlens:tabs:blameable'"
+	},
+	{
+		"key": "ctrl+shift+g shift+b",
+		"command": "-gitlens.toggleCodeLens",
+		"when": "editorTextFocus && !gitlens:disabled && !gitlens:disabledToggleCodeLens && config.gitlens.keymap == 'chorded'"
+	},
+	{
+		"key": "ctrl+shift+g g",
+		"command": "-workbench.view.scm",
+		"when": "workbench.scm.active && !gitlens:disabled && config.gitlens.keymap == 'chorded'"
+	},
+	{
+		"key": "shift+alt+v",
+		"command": "latex-utilities.formattedPaste",
+		"when": "editorTextFocus && !config.latex-utilities.formattedPaste.useAsDefault && editorLangId == 'latex'"
+	},
+	{
+		"key": "ctrl+shift+v",
+		"command": "-latex-utilities.formattedPaste",
+		"when": "editorTextFocus && !config.latex-utilities.formattedPaste.useAsDefault && editorLangId == 'latex'"
+	},
+	{
+		"key": "ctrl+alt+v",
+		"command": "latex-preview.preview",
+		"when": "editorTextFocus && editorLangId == 'latex'"
+	},
+	{
+		"key": "ctrl+shift+l",
+		"command": "-latex-preview.preview",
+		"when": "editorTextFocus && editorLangId == 'latex'"
+	},
+	{
+		"key": "ctrl+l alt+v",
+		"command": "-latex-workshop.view",
+		"when": "config.latex-workshop.bind.altKeymap.enabled && !virtualWorkspace && editorLangId =~ /^latex$|^latex-expl3$|^doctex$|^rsweave$|^jlweave$|^pweave$/"
+	},
+	{
+		"key": "ctrl+alt+v",
+		"command": "-latex-workshop.view",
+		"when": "!config.latex-workshop.bind.altKeymap.enabled && !virtualWorkspace && editorLangId =~ /^latex$|^latex-expl3$|^doctex$|^rsweave$|^jlweave$|^pweave$/"
+	},
+	{
+		"key": "ctrl+shift+k",
+		"command": "-editor.action.deleteLines",
+		"when": "textInputFocus && !editorReadonly"
+	},
+	{
+		"key": "ctrl+shift+k",
+		"command": "workbench.view.extension.todo-tree-container"
+	},
+	{
+		"key": "ctrl+alt+`",
+		"command": "workbench.action.togglePanel"
+	},
+	{
+		"key": "ctrl+j",
+		"command": "-workbench.action.togglePanel"
+	},
+	{
+		"key": "ctrl+w",
+		"command": "-workbench.action.closeActiveEditor"
+	},
+	{
+		"key": "ctrl+k z",
+		"command": "workbench.action.toggleZenMode"
+	},
+	{
+		"key": "ctrl+k z",
+		"command": "-workbench.action.toggleZenMode",
+		"when": "!isAuxiliaryWindowFocusedContext"
+	},
+	{
+		"key": "ctrl+w",
+		"command": "workbench.action.terminal.kill",
+		"when": "terminalFocusInAny"
+	},
+	{
+		"command": "vscode-neovim.send",
+		"key": "ctrl+k",
+		"when": "editorTextFocus && neovim.mode != insert",
+		"args": "<C-k>"
+	},
+	{
+		"key": "ctrl+alt+d",
+		"command": "workbench.panel.repl.view.focus"
 	}
 ]

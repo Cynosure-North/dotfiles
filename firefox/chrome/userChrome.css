@@ -38,27 +38,17 @@
 	}
 }
 
-/* Nav bar buttons order, visibility & tab through TODO */
-#nav-bar { direction: rtl; top: -1px }
-#urlbar-container,
-#customizationui-widget-panel {
-	direction: ltr !important;
-}
-#forward-button { order: -1 !important; }
-#back-button { padding-right: 2px !important; }
-#forward-button { padding-right: 8px !important; }
-#PanelIU-menu-button { margin-left: 4px !important; }
+#PanelUI-button { order: 1; }
+#nav-bar-customization-target { order: 2; }
 
 #PanelUI-menu-button,
 #unified-extensions-button,
+#back-button,
+#forward-button,
 #reload-button,
 #stop-button {
-	padding: 2px !important;
+	padding: 0 !important;
 }
-#reload-button, #stop-button {
-	margin: 1px !important;
-}
-
 
 /* * * *
  * All tabs button
@@ -82,10 +72,44 @@
 /* * * *
  * Compact nav bar when not hovering
  * * * */
-/* TODO: */
+#PanelUI-button,	/* Defaults */
+#nav-bar-customization-target :is(
+	#forward-button,
+	#back-button,
+	#reload-button,
+	#identity-permission-box[hasPermissions])
+{
+	visibility: collapse;
+}
+
+#unified-extensions-button { width: 0; opacity: 0; } /* The extension menus need the button present to anchor off */
+#urlbar-container { padding-left: 8px; margin-right: 4px }
+#urlbar { max-width: 525px !important; }	/* NOTE: Janky */
 
 
-/* * * * 
+html:hover:has(#browser:not(:hover))
+	{
+		& :is( #PanelUI-button,
+		#nav-bar-customization-target :is(
+			#forward-button,
+			#back-button,
+			#reload-button,
+			#identity-permission-box[hasPermissions]))
+			{
+				visibility: visible;
+			}
+
+		#unified-extensions-button {
+			width: initial;
+			opacity: 1;
+		}
+
+		#urlbar-container { padding-left: 0 !important; margin-right: 0 !important; }
+	}
+
+
+
+/* * * *
  * Small extension menu
  * * * */
 #unified-extensions-view {
@@ -155,34 +179,6 @@
 .tab-close-button:hover { opacity: 1; }
 .tabbrowser-tab[pinned] .tab-close-button { display: none !important; }
 
-
-/* * * *
- * Hide the buttons normally
- * * * */
-
-html { --toolbar-button-vis: flex; }
-html:has(toolbar#nav-bar:not(:hover)) { --toolbar-button-vis: none; }
-html:has(:is(
-	#appMenu-popup:hover,
-	#unified-extensions-panel:hover,
-	#protections-popup:hover,
-	#identity-popup:hover,
-	#permissions-popup:hover))
-{ --toolbar-button-vis: flex !important; }
-
-#PanelUI-button,
-#nav-bar-customization-target :is(
-	#forward-button,
-	#back-button,
-	#stop-reload-button,
-	#unified-extensions-button,
-	#tracking-protection-icon-container,
-	#identity-permission-box[hasPermissions])
-{
-	display: var(--toolbar-button-vis) !important;
-}
-
-
 /* * * *
  * Misc
  * * * */
@@ -197,7 +193,7 @@ html:has(:is(
 }
 #urlbar[breakout-extend] {
 	position: fixed !important;
-	left: 2px !important;
+	left: 8px !important;
 	top: 5px !important;
 }
 #urlbar[breakout-extend] > #urlbar-background { background-color: Field !important; }
@@ -216,6 +212,13 @@ html:has(:is(
 #main-window[privatebrowsingmode="temporary"] #navigator-toolbox {
 	background-color: #25003E !important;
 	--tab-selected-bgcolor: #8000D7 !important;
+}
+
+/* Clean Private Newtab page */
+html:has(#TabsToolbar tab[label="about:privatebrowsing"][selected="true"]) #browser {
+	background-color: #25003E !important;
+
+	& > #tabbrowser-tabbox { content-visibility: hidden; }	/* TODO: Flash */
 }
 
 /* Remove the rainbow separator from the hamburger */
@@ -242,9 +245,8 @@ tabs#tabbrowser-tabs { border: none !important }
 	cursor: auto;
 }
 
-/* #tracking-protection-icon-container, */
+#tracking-protection-icon-container,
 #firefox-view-button,
-box#identity-box label[value="Extension (New Tab Override)"],	/* On new tabs */
 .search-panel-one-offs-header,				/* 'This time search with' */
 #urlbar-anon-search-settings, 				/* Settings in the search box */
 #private-browsing-indicator-with-label,		/* Private label */
@@ -269,6 +271,7 @@ toolbarspring,								/* Toolbar spacers */
 #downloads-button,							/* Downloads popup & Button */
 #home-button,
 #pageActionButton,							/* Add to container dropdown */
+.urlbarView-button-menu,					/* 3 dots in search results */
 
 
 /* * * *
@@ -340,6 +343,7 @@ toolbarspring,								/* Toolbar spacers */
 #context_closeTab,
 #context_closeTabOptions,
 #context_undoCloseTab,
+#context_pinTab,
 #tabContextMenu menuseparator,
 
 /* Generic toolbar button */
@@ -354,6 +358,8 @@ toolbarspring,								/* Toolbar spacers */
 #_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root, 		/* Bitwarden */
 #_testpilot-containers-menuitem-20,
 #ublock0_raymondhill_net-menuitem-_uBlock0-blockElement,		/* uBlock - block element */
+menu[label="Summarize and Translate with Gemini"],
+menu[label="Zotero Connector"],
 
 
 #dummy

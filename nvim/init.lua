@@ -56,11 +56,11 @@ opt.fillchars:append("eob: ")			-- Hide ~ at end of buffer
 opt.wrap = false						-- Text wrapping, is true in unnamed buffers, .txt, .md, .adoc
 opt.display = { "lastline", "uhex" }	-- Truncate and show hex codes for unprintable characters
 opt.cpoptions:remove('_')				-- Fix cw inconsistency
+opt.cpoptions:append('M')				-- Ignore escaped brackets for matchpairs
 opt.splitright = true					-- New windows on the right
 -- Show indents
 opt.list = true
 opt.listchars = { tab = '│ ', lead = '·', trail = '៖', nbsp = '␣', precedes = '←', extends= '→' }		-- TODO: use conceal so it hides the ៖ with when typing, TODO: find a way to hide trailing whitespace before comments
-api.nvim_set_hl(0, "Whitespace", { fg = "DarkGray" })
 -- Syntax highlighting
 cmd([[syn match AcronymNoSpell "\<\(\u\|\d\)\{3,}s\?\>" contains=@NoSpell]])	-- Don't spellcheck acronyms
 cmd([[syn match UrlNoSpell "\w\+:\/\/\S\+" contains=@NoSpell]])					-- Or URLs		TODO: Doesn't work in text files
@@ -166,14 +166,8 @@ map("n", "A", "")
 map("n", "<C-i>", "A")
 
 -- Unified Scrolling
-map("", "<C-k>", "<C-b>zz")
-map("", "<C-j>", function()		-- Don't scroll past the end of the buffer
-	if fn.line("$") >= fn.line("w$") + (fn.line("w$") - fn.line("w0")) then
-		feedkeys("<C-f>zz", "n")
-	else
-		feedkeys("Gz-", "n")
-	end
-end)
+map("", "<C-k>", "10k")
+map("", "<C-j>", "10j")
 map("", "<C-u>", "")
 map("", "<C-u>", "")
 map("", "<C-f>", "")

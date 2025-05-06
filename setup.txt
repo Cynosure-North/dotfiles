@@ -38,7 +38,9 @@ git
 	# Convert this repo to a ssh repo (because you probably cloned it over https)
 	git remote set-url orgin git@github.com:Cynosure-North/dotfiles.git
 keyd
-	https://github.com/rvaiya/keydz
+	sudo dnf copr enable alternateved/keyd
+	sudo dnf instll keyd
+	https://github.com/rvaiya/keyd?tab=readme-ov-file
 	sudo ln -s $HOME/Coding/dotfiles/keyd /etc/keyd
 picard
 	sudo dnf install chromaprint-tools
