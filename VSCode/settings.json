@@ -96,4 +96,5 @@
     "latex-workshop.message.error.show": false,
     "rust-analyzer.initializeStopped": true,
     "python.terminal.activateEnvironment": false,
+    "editor.minimap.enabled": false,
 }

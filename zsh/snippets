@@ -1,3 +1,2 @@
 for f in *.flac; do ffmpeg -i "$f" -ab 320k -map_metadata 0 -id3v2_version 3 "${f%.flac}.mp3"; done		# Flac to mp3
-\vlc --recursive expand --random ~/Music		# Random music
 ffmpeg -i infile.mp4 -i infile.srt -c copy -c:s mov_text outfile.mp4		# Embed .srt in mp4

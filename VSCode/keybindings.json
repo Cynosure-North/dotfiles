@@ -254,7 +254,7 @@
 		"when": "!isAuxiliaryWindowFocusedContext"
 	},
 	{
-		"key": "ctrl+w",
+		"key": "ctrl+shift+w",
 		"command": "workbench.action.terminal.kill",
 		"when": "terminalFocusInAny"
 	},
@@ -267,5 +267,9 @@
 	{
 		"key": "ctrl+alt+d",
 		"command": "workbench.panel.repl.view.focus"
+	},
+	{
+		"key": "ctrl+shift+w",
+		"command": "-workbench.action.closeWindow"
 	}
 ]
