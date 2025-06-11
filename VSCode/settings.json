@@ -97,4 +97,13 @@
     "rust-analyzer.initializeStopped": true,
     "python.terminal.activateEnvironment": false,
     "editor.minimap.enabled": false,
+    "cSpell.userWords": [
+        "microcontrollers"
+    ],
+    "[latex]": {
+        "editor.formatOnPaste": false,
+        "editor.suggestSelection": "recentlyUsedByPrefix",
+        "editor.wordWrap": "on",
+        "editor.formatOnSave": false
+    }
 }

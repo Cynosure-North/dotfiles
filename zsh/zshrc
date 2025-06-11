@@ -73,6 +73,7 @@ alias qmv='fd . --color=never -t f | qmv'
 alias vlc='cvlc --play-and-exit --fullscreen --no-video-title --mouse-hide-timeout 1 --stereo-mode 1'
 alias du='du -sh ./*'
 alias hist='fc -il'
+alias vi=nvim
 
 alias cpy=wl-copy
 alias pst=wl-paste
@@ -82,6 +83,7 @@ alias _='sudo '			# We'll see how this goes
 autoload -Uz bracketed-paste-magic		# Maybe can remove
 zle -N bracketed-paste bracketed-paste-magic
 
+export PATH=$PATH:/usr/local/go/bin	# TODO
 
 source "$HOME/Coding/dotfiles/zsh/completion.zsh"
 source "$HOME/Coding/dotfiles/zsh/keybindings.zsh"
