@@ -64,6 +64,7 @@ opt.listchars = { tab = '│ ', lead = '·', trail = '៖', nbsp = '␣', preced
 -- Syntax highlighting
 cmd([[syn match AcronymNoSpell "\<\(\u\|\d\)\{3,}s\?\>" contains=@NoSpell]])	-- Don't spellcheck acronyms
 cmd([[syn match UrlNoSpell "\w\+:\/\/\S\+" contains=@NoSpell]])					-- Or URLs		TODO: Doesn't work in text files
+vim.api.nvim_set_hl(0, "SpellCap", {sp="Blue", undercurl=true})
 
 -- Evilish mode
 opt.virtualedit = "block,onemore"
@@ -117,6 +118,7 @@ local function setupWriting()
 	opt.list = false
 	opt.linebreak = true
 	opt.colorcolumn = ""
+	opt.foldenable = false
 	-- Also disable xiyaowong/nvim-cursorword
 end
 api.nvim_create_autocmd( 'BufEnter',			-- Wrap in text files

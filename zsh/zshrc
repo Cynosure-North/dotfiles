@@ -74,14 +74,17 @@ alias vlc='cvlc --play-and-exit --fullscreen --no-video-title --mouse-hide-timeo
 alias du='du -sh ./*'
 alias hist='fc -il'
 alias vi=nvim
+alias scr='cd $(mktemp -d)'
 
 alias cpy=wl-copy
 alias pst=wl-paste
 alias opn=xdg-open
-alias _='sudo '			# We'll see how this goes
 
 autoload -Uz bracketed-paste-magic		# Maybe can remove
 zle -N bracketed-paste bracketed-paste-magic
+
+export PATH=$HOME/.cargo/bin:$PATH	# Rust
+export PATH=$HOME/.local/bin:$PATH	# Python
 
 source "$HOME/Coding/dotfiles/zsh/completion.zsh"
 source "$HOME/Coding/dotfiles/zsh/keybindings.zsh"

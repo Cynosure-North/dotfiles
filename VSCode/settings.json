@@ -18,17 +18,24 @@
     "html.autoClosingTags": false,
     // --- Extensions ---
     // TODO
-    "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^[ \\t]*(-|\\d+.))\\s*.+($TAGS)",
+    "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^|^[ \\t]*(-|\\d+.))\\s*|\\\\)($TAGS)",
     "todo-tree.general.tags": [
+        "TODO",
+        "todo!",
+        "todo{",
         "BUG",
         "HACK",
         "FIXME",
-        "TODO",
         "[ ]",
         "[x]",
-        "NOTE",
-        "todo!()"
+        "NOTE"
     ],
+    "todo-tree.general.tagGroups": {
+        "TODO": [
+            "todo!",
+            "todo{"
+        ]
+    },
     // Nvim
     "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
     "window.titleBarStyle": "custom",
@@ -105,5 +112,10 @@
         "editor.suggestSelection": "recentlyUsedByPrefix",
         "editor.wordWrap": "on",
         "editor.formatOnSave": false
-    }
+    },
+    "shellcheck.logLevel": "error",
+    "files.exclude": {
+        "**/.vscode": true
+    },
+    "explorer.excludeGitIgnore": true,
 }
