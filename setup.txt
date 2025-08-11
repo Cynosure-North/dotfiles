@@ -23,6 +23,9 @@ vscodium
 	link extensions
 	ln -s $HOME/Coding/dotfiles/VSCode/settings.json $HOME/.config/VSCodium/User/settings.json
 	ln -s $HOME/Coding/dotfiles/VSCode/keybindings.json $HOME/.config/VSCodium/User/keybindings.json
+kew
+	ln -s $HOME/Coding/dotfiles/kewrc $HOME/.config/kew/kewrc
+
 
 Ripgrep
 fd-find

@@ -62,9 +62,9 @@ opt.splitright = true					-- New windows on the right
 opt.list = true
 opt.listchars = { tab = '│ ', lead = '·', trail = '៖', nbsp = '␣', precedes = '←', extends= '→' }		-- TODO: use conceal so it hides the ៖ with when typing, TODO: find a way to hide trailing whitespace before comments
 -- Syntax highlighting
-cmd([[syn match AcronymNoSpell "\<\(\u\|\d\)\{3,}s\?\>" contains=@NoSpell]])	-- Don't spellcheck acronyms
+cmd([[syn match AcronymNoSpell "\<\(\u\|\d\)\{3,}s\?\>" contains=@NoSpell]])	-- Don't spellcheck acronyms, TODO: Doesn't work
 cmd([[syn match UrlNoSpell "\w\+:\/\/\S\+" contains=@NoSpell]])					-- Or URLs		TODO: Doesn't work in text files
-vim.api.nvim_set_hl(0, "SpellCap", {sp="Blue", undercurl=true})
+vim.api.nvim_set_hl(0, "SpellCap", {sp="Blue", undercurl=true})		-- TODO: Doesn't work
 
 -- Evilish mode
 opt.virtualedit = "block,onemore"

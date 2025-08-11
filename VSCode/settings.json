@@ -118,4 +118,5 @@
         "**/.vscode": true
     },
     "explorer.excludeGitIgnore": true,
+    "explorer.confirmPasteNative": false,
 }
