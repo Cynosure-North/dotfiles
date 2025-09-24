@@ -47,7 +47,7 @@
     "editor.rulers": [
         100
     ],
-    "editor.minimap.autohide": true,
+    "editor.minimap.autohide": "mouseover",
     "editor.minimap.renderCharacters": false,
     "editor.renderWhitespace": "all",
     "gitlens.ai.experimental.generateCommitMessage.enabled": false,
@@ -105,6 +105,7 @@
     "python.terminal.activateEnvironment": false,
     "editor.minimap.enabled": false,
     "cSpell.userWords": [
+        "allistic",
         "microcontrollers"
     ],
     "[latex]": {
@@ -117,6 +118,7 @@
     "files.exclude": {
         "**/.vscode": true
     },
-    "explorer.excludeGitIgnore": true,
     "explorer.confirmPasteNative": false,
+    "workbench.editor.empty.hint": "hidden",
+    "explorer.excludeGitIgnore": true,
 }

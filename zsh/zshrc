@@ -75,6 +75,11 @@ alias du='du -sh ./*'
 alias hist='fc -il'
 alias vi=nvim
 alias scr='cd $(mktemp -d)'
+alias ,tv="nvim $HOME/Documents/Notes/Tv.txt"
+alias ,films="nvim $HOME/Documents/Notes/Films.txt"
+alias ,diary="nvim $HOME/Documents/Diary/$DATE.txt"
+alias ,health="nvim $HOME/Documents/Health/$DATE.txt"
+
 
 alias cpy=wl-copy
 alias pst=wl-paste

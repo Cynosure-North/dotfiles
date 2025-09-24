@@ -247,6 +247,7 @@ tabs#tabbrowser-tabs { border: none !important }
 
 #tracking-protection-icon-container,
 #firefox-view-button,
+#picture-in-picture-button,
 .search-panel-one-offs-header,				/* 'This time search with' */
 #urlbar-anon-search-settings, 				/* Settings in the search box */
 #private-browsing-indicator-with-label,		/* Private label */
