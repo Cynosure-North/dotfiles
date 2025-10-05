@@ -82,9 +82,12 @@
 	visibility: collapse;
 }
 
+#stop-reload-button {
+	padding-left: var(--toolbarbutton-inner-padding);
+}
+
 #unified-extensions-button { width: 0; opacity: 0; } /* The extension menus need the button present to anchor off */
 #urlbar-container { padding-left: 8px; margin-right: 4px }
-#urlbar { max-width: 525px !important; }	/* NOTE: Janky */
 
 
 html:hover:has(#browser:not(:hover))
@@ -98,6 +101,10 @@ html:hover:has(#browser:not(:hover))
 			{
 				visibility: visible;
 			}
+			
+		#stop-reload-button {
+			padding-left: 0;
+		}
 
 		#unified-extensions-button {
 			width: initial;
@@ -360,6 +367,7 @@ toolbarspring,								/* Toolbar spacers */
 #_testpilot-containers-menuitem-20,
 #ublock0_raymondhill_net-menuitem-_uBlock0-blockElement,		/* uBlock - block element */
 menu[label*="Zotero"],
+menuitem[label*="Zotero"],
 
 
 #dummy
