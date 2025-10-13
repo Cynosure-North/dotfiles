@@ -128,7 +128,7 @@ api.nvim_create_autocmd( 'BufEnter',			-- Wrap in text files
 --		Mappings
 ----
 local function map(mode, lhs, rhs, opts)		-- convenience function
-	local options = {noremap = true}
+	local options = {remap = false}
 	if opts then options = vim.tbl_extend('force', options, opts) end
 	vim.keymap.set(mode, lhs, rhs, options)
 end
@@ -155,8 +155,8 @@ map("n", "<A-j>", "<Esc><C-w>j")
 map("n", "<A-k>", "<Esc><C-w>k")
 map("n", "<A-l>", "<Esc><C-w>l")
 map("n", "<C-w>n", ":vnew<Enter>")
-map("", "j", "gj")
-map("", "k", "gk")
+map("", "j", "gj", {remap = true})
+map("", "k", "gk", {remap = true})
 map("n", "q:", "")	-- Disable command line window (:<C-f> still works)
 map("n", "q/", "")
 map("n", "q?", "")
@@ -168,8 +168,8 @@ map("n", "A", "")
 map("n", "<C-i>", "A")
 
 -- Unified Scrolling
-map("", "<C-k>", "10k")
-map("", "<C-j>", "10j")
+map("", "<C-k>", "10gk", {remap = true})
+map("", "<C-j>", "10gj", {remap = true})
 map("", "<C-u>", "")
 map("", "<C-u>", "")
 map("", "<C-f>", "")
@@ -177,6 +177,19 @@ map("", "<C-f>", "")
 map("", "<C-e>", "")
 map("", "<C-y>", "")
 map("i", "<Esc>", "<Esc>l")
+
+-- VSCodium
+if vim.g.vscode then
+	local vscode = require('vscode')
+	-- Remap folding keys
+	vim.keymap.set('n', 'zM', function() vscode.call("editor.foldAll") end, { noremap = true, silent = true })
+	vim.keymap.set('n', 'zR', function() vscode.call("editor.unfoldAll") end, { noremap = true, silent = true })
+	vim.keymap.set('n', 'zc', function() vscode.call("editor.fold") end, { noremap = true, silent = true })
+	vim.keymap.set('n', 'zC', function() vscode.call("editor.foldRecursively") end, { noremap = true, silent = true })
+	vim.keymap.set('n', 'zo', function() vscode.call("editor.unfold") end, { noremap = true, silent = true })
+	vim.keymap.set('n', 'zO', function() vscode.call("editor.unfoldRecursively") end, { noremap = true, silent = true })
+	vim.keymap.set('n', 'za', function() vscode.call("editor.toggleFold") end, { noremap = true, silent = true })
+end
 
 
 fn.digraph_setlist({

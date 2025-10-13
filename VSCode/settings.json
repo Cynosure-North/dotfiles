@@ -1,23 +1,7 @@
 {
-    // Misc
-    "security.workspace.trust.untrustedFiles": "open",
-    "files.autoSave": "afterDelay",
-    "explorer.confirmDelete": false,
-    "explorer.confirmDragAndDrop": false,
-    "workbench.startupEditor": "none",
-    "editor.insertSpaces": false,
-    // Terminal
-    "terminal.integrated.scrollback": 2000,
-    "terminal.integrated.defaultProfile.windows": "Command Prompt",
-    "terminal.integrated.cursorStyle": "line",
-    // Git
-    "git.enableSmartCommit": true,
-    "git.confirmSync": false,
-    "git.autofetch": true,
-    // HTML
-    "html.autoClosingTags": false,
     // --- Extensions ---
-    // TODO
+    "shellcheck.logLevel": "error",
+    // Todo Tree
     "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^|^[ \\t]*(-|\\d+.))\\s*|\\\\)($TAGS)",
     "todo-tree.general.tags": [
         "TODO",
@@ -38,21 +22,10 @@
     },
     // Nvim
     "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
-    "window.titleBarStyle": "custom",
-    "zenMode.centerLayout": false,
-    "zenMode.hideLineNumbers": false,
     "extensions.experimental.affinity": {
         "asvetliakov.vscode-neovim": 1
     },
-    "editor.rulers": [
-        100
-    ],
-    "editor.minimap.autohide": "mouseover",
-    "editor.minimap.renderCharacters": false,
-    "editor.renderWhitespace": "all",
-    "gitlens.ai.experimental.generateCommitMessage.enabled": false,
-    "aws.telemetry": false,
-    // gitlens
+    // Gitlens
     "gitlens.views.scm.grouped.views": {
         "commits": false,
         "branches": false,
@@ -69,19 +42,8 @@
     "gitlens.showWhatsNewAfterUpgrades": false,
     "gitlens.plusFeatures.enabled": false,
     "gitlens.hovers.avatars": false,
-    "zenMode.showTabs": "none",
-    "window.customTitleBarVisibility": "windowed",
-    "workbench.layoutControl.enabled": false,
-    "editor.cursorSurroundingLines": 10,
-    "editor.cursorSurroundingLinesStyle": "all",
-    "editor.formatOnPaste": true,
-    "editor.formatOnSave": true,
-    "editor.suggest.selectionMode": "whenQuickSuggestion",
-    "window.autoDetectColorScheme": true,
-    "workbench.navigationControl.enabled": false,
-    "window.commandCenter": false,
-    "latex-utilities.message.update.show": false,
-    "cSpell.language": "en,en-AU",
+    "gitlens.codeLens.authors.enabled": false,
+    "gitlens.codeLens.enabled": false,
     // Copilot
     "chat.commandCenter.enabled": false,
     "github.copilot.enable": {
@@ -91,34 +53,76 @@
         "scminput": false,
         "latex": false,
     },
-    "[rust]": {
-        "editor.formatOnSave": false // Rustfmt sucks
-    },
-    "editor.acceptSuggestionOnCommitCharacter": false,
-    "gitlens.codeLens.authors.enabled": false,
-    "gitlens.codeLens.enabled": false,
-    "rust-analyzer.lens.enable": false,
-    "latex-workshop.formatting.latex": "latexindent",
-    "latex-utilities.message.error.show": false,
-    "latex-workshop.message.error.show": false,
-    "rust-analyzer.initializeStopped": true,
-    "python.terminal.activateEnvironment": false,
-    "editor.minimap.enabled": false,
+    // Cspell
     "cSpell.userWords": [
         "allistic",
         "microcontrollers"
     ],
+    "cSpell.language": "en,en-AU",
+    // --- Languages ---
+    "[rust]": {
+        "editor.formatOnSave": false // Rustfmt sucks
+    },
+    "rust-analyzer.lens.enable": false,
+    "rust-analyzer.initializeStopped": true,
     "[latex]": {
         "editor.formatOnPaste": false,
-        "editor.suggestSelection": "recentlyUsedByPrefix",
         "editor.wordWrap": "on",
-        "editor.formatOnSave": false
+        "editor.formatOnSave": false,
+        "editor.wordBasedSuggestions": "off",
+        "editor.occurrencesHighlight": "off",
+        "editor.snippetSuggestions": "none",
     },
-    "shellcheck.logLevel": "error",
+    "latex-workshop.formatting.latex": "latexindent",
+    "latex-utilities.message.error.show": false,
+    "latex-workshop.message.error.show": false,
+    "latex-utilities.message.update.show": false,
     "files.exclude": {
         "**/.vscode": true
     },
-    "explorer.confirmPasteNative": false,
-    "workbench.editor.empty.hint": "hidden",
+    "python.terminal.activateEnvironment": false,
+    "html.autoClosingTags": false,
+    // --- General ---
+    // Explorer
     "explorer.excludeGitIgnore": true,
+    "explorer.confirmPasteNative": false,
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    // Editor
+    "editor.acceptSuggestionOnCommitCharacter": false,
+    "editor.minimap.enabled": false,
+    "editor.minimap.autohide": "mouseover",
+    "editor.minimap.renderCharacters": false,
+    "editor.renderWhitespace": "all",
+    "editor.cursorSurroundingLines": 10,
+    "editor.cursorSurroundingLinesStyle": "all",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.suggest.selectionMode": "whenQuickSuggestion",
+    "editor.insertSpaces": false,
+    "editor.rulers": [
+        100
+    ],
+    // Terminal
+    "terminal.integrated.scrollback": 2000,
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    "terminal.integrated.cursorStyle": "line",
+    // Git
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    // Zen
+    "zenMode.centerLayout": false,
+    "zenMode.hideLineNumbers": false,
+    "zenMode.showTabs": "none",
+    // Misc
+    "window.autoDetectColorScheme": true,
+    "window.customTitleBarVisibility": "windowed",
+    "window.titleBarStyle": "custom",
+    "workbench.layoutControl.enabled": false,
+    "workbench.editor.empty.hint": "hidden",
+    "workbench.navigationControl.enabled": false,
+    "workbench.startupEditor": "none",
+    "security.workspace.trust.untrustedFiles": "open",
+    "files.autoSave": "afterDelay",
 }
