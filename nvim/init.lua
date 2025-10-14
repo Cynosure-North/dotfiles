@@ -1,11 +1,11 @@
--- TODO: Cursed mode
--- TODO: Prose more
+-- TODO
+-- Prose more
 --	- Thesaurus
 --	- Dictionary Lookup
--- TODO: When moving from a split, to a side with 2 splits, go back to the most recently visited one
--- Aliases
--- Incrimental search colors - highlight cursor/current match
+-- When moving from a split, to a side with 2 splits, go back to the most recently visited one
+-- Incremental search colors - highlight cursor/current match
 -- Don't spellcheck capitalised acronyms
+-- Replace Packer
 local opt = vim.opt
 local api = vim.api
 local cmd = vim.cmd
@@ -166,6 +166,7 @@ map("n", "q?", "")
 map("n", "a", "")
 map("n", "A", "")
 map("n", "<C-i>", "A")
+map({"n", "v"}, "$", "$l", {remap = true})
 
 -- Unified Scrolling
 map("", "<C-k>", "10gk", {remap = true})
@@ -389,14 +390,6 @@ prequire("auto-session").setup {
 	auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/"},
 }
 
--- svermeulen/vim-yoink
-g.yoinkSyncNumberedRegisters = 1
-g.yoinkIncludeDeleteOperations = 1
-g.yoinkSavePersistently = 1
-g.yoinkAutoFormatPaste = 1
-g.yoinkMoveCursorToEndOfPaste = 1
-g.yoinkIncludeNamedRegisters = 0
-
 -- DanilaMihailov/beacon.nvim
 g.beacon_minimal_jump = 5
 
@@ -431,7 +424,6 @@ return require("packer").startup(function(use)		-- Install packages
 	use "tpope/vim-characterize"						-- More info with ga
 	use "rmagatti/auto-session"							-- Automatic session management
 	use "svermeulen/vim-cutlass"						-- Make delete actually delete
-	use "svermeulen/vim-yoink"							-- Copy history
 
 	-- keep at the end
 	if packer_bootstrap then		-- If packer was just installed run sync so it installs all the other plugins
