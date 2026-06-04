@@ -258,6 +258,10 @@ html:hover:has(#browser:not(:hover)) {
 	box-shadow: none !important;
 }
 
+#urlbar {
+	padding-bottom: 6px;
+}
+
 #urlbar[breakout-extend] {
 	position: fixed !important;
 	left: 8px !important;
@@ -336,54 +340,31 @@ tabs#tabbrowser-tabs {
 #tracking-protection-icon-container,
 #firefox-view-button,
 #picture-in-picture-button,
-.search-panel-one-offs-header,
-/* 'This time search with' */
-#urlbar-anon-search-settings,
-/* Settings in the search box */
-#private-browsing-indicator-with-label,
-/* Private label */
-toolbarbutton#scrollbutton-up,
-/* Scroll indicators when the window is too narrow */
+.search-panel-one-offs-header,					 /* 'This time search with' */
+#urlbar-anon-search-settings,					 /* Settings in the search box */
+#private-browsing-indicator-with-label,			 /* Private label */
+toolbarbutton#scrollbutton-up,					 /* Scroll indicators when the window is too narrow */
 toolbarbutton#scrollbutton-down,
-#userContext-icons,
-/* Container tab */
-#pageAction-urlbar-jid1-xufzosoflzsoxg_jetpack,
-/* RES badge */
-.titlebar-buttonbox-container,
-/* Close, maximise, etc buttons */
-#tabs-newtab-button,
-/* New tab */
-#new-tab-button,
-/* IDK why there's 2 */
-.titlebar-spacer[type="post-tabs"],
-/* Space between down arrow and quit */
-.titlebar-spacer[type="pre-tabs"],
-/* Space on the left before tabs (only noticeable in 2 line mode) */
+#userContext-icons,								 /* Container tab */
+.titlebar-buttonbox-container,					 /* Close, maximise, etc buttons */
+#tabs-newtab-button,							 /* New tab */
+#new-tab-button,								 /* IDK why there's 2 */
+.titlebar-spacer[type="post-tabs"],				 /* Space between down arrow and quit */
+.titlebar-spacer[type="pre-tabs"],				 /* Space on the left before tabs (only noticeable in 2 line mode) */
 #save-to-pocket-button,
-/* Pocket */
-toolbarspring,
-/* Toolbar spacers */
+toolbarspring,									 /* Toolbar spacers */
 #fullscreen-warning,
-/* Fullscreen warning */
-#star-button-box,
-/* Bookmark button */
-#pageAction-urlbar-_testpilot-containers,
-/* Containers button */
-#fxa-toolbar-menu-button,
-/* Mozilla account */
-#nav-bar-overflow-button,
-/* Show the things I've hidden */
-#urlbar-go-button,
-/* Search/goto button in url bar (Pointless)*/
-#blocked-permissions-container,
-/* No camera etc. Still shows the switch dropdown */
-#downloads-button,
-/* Downloads popup & Button */
+#star-button-box,								 /* Bookmark button */
+#pageAction-urlbar-_testpilot-containers,		 /* Containers button */
+#fxa-toolbar-menu-button,						 /* Mozilla account */
+#nav-bar-overflow-button,						 /* Show the things I've hidden */
+#urlbar-go-button,								 /* Search/goto button in url bar (Pointless)*/
+#blocked-permissions-container,					 /* No camera etc. Still shows the switch dropdown */
+#downloads-button,								 /* Downloads popup & Button */
 #home-button,
-#pageActionButton,
-/* Add to container dropdown */
-.urlbarView-button-menu,
-/* 3 dots in search results */
+#pageActionButton,							 	/* Add to container dropdown */
+.urlbarView-button-menu,					 	/* 3 dots in search results */
+.private-browsing-indicator-with-label,
 
 
 /* * * *
@@ -467,13 +448,12 @@ toolbarspring,
 .unified-extensions-context-menu-report-extension,
 
 /* Misc extensions */
-#_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root,
-/* Bitwarden */
+#_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root,				 /* Bitwarden */
 #_testpilot-containers-menuitem-20,
-#ublock0_raymondhill_net-menuitem-_uBlock0-blockElement,
-/* uBlock - block element */
+#ublock0_raymondhill_net-menuitem-_uBlock0-blockElement,			 /* uBlock - block element */
 menu[label*="Zotero"],
 menuitem[label*="Zotero"],
+#pageAction-urlbar-jid1-xufzosoflzsoxg_jetpack,	 /* RES badge */
 
 
 #dummy {

@@ -56,7 +56,15 @@
     // Cspell
     "cSpell.userWords": [
         "allistic",
-        "microcontrollers"
+        "Aotearoa",
+        "cadr",
+        "disaggregating",
+        "hotswap",
+        "keypresses",
+        "microcontrollers",
+        "pushback",
+        "unergonomic",
+        "usecase"
     ],
     "cSpell.language": "en,en-AU",
     // --- Languages ---
@@ -77,14 +85,33 @@
     "latex-utilities.message.error.show": false,
     "latex-workshop.message.error.show": false,
     "latex-utilities.message.update.show": false,
-    "files.exclude": {
-        "**/.vscode": true
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "--shell-escape",
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdf",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+    ],
+    "[asciidoc]": {
+        "editor.wordWrap": "on",
+        "editor.quickSuggestions": {
+            "comments": "off",
+            "strings": "off",
+            "other": "off"
+        },
+        "editor.occurrencesHighlight": "off"
     },
     "python.terminal.activateEnvironment": false,
     "html.autoClosingTags": false,
-    // --- General ---
-    // Explorer
-    "explorer.excludeGitIgnore": true,
     "explorer.confirmPasteNative": false,
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
@@ -125,4 +152,12 @@
     "workbench.startupEditor": "none",
     "security.workspace.trust.untrustedFiles": "open",
     "files.autoSave": "afterDelay",
+    "files.exclude": {
+        "**/.vscode": true
+    },
+    "claudeCode.preferredLocation": "panel",
+    "claudeCode.selectedModel": "opus",
+    "avdmanager.sdkPath": "/home/north/Android/Sdk",
+    "explorer.excludeGitIgnore": true,
+    "workbench.activityBar.location": "top",
 }

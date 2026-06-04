@@ -1,0 +1,22 @@
+! 6 Mar 2026 https://www.youtube.com
+www.youtube.com###masthead-container
+www.youtube.com###contentContainer
+www.youtube.com###guide
+www.youtube.com##ytd-rich-section-renderer.ytd-rich-grid-renderer.style-scope
+
+! 7 Mar 2026 https://www.youtube.com
+www.youtube.com###top-row
+www.youtube.com###panels
+www.youtube.com##ytd-watch-next-secondary-results-renderer
+www.youtube.com##.ytd-playlist-panel-renderer.style-scope.header
+www.youtube.com##.ytp-subtitles-button
+www.youtube.com##.ytp-right-controls-right
+www.youtube.com##.ytp-volume-area
+www.youtube.com##.ytp-fullscreen-grid
+www.youtube.com##.ytp-gradient-bottom
+www.youtube.com##.ytp-overlay-top-left
+www.youtube.com##.ytp-overlay-top-right
+www.youtube.com##.ytPlayerQuickActionButtonsHost > toggle-button-view-model:nth-child(3)
+www.youtube.com##.ytPlayerQuickActionButtonsHost > button-view-model:nth-child(4)
+www.youtube.com###player-controls
+www.youtube.com##ytd-mini-guide-renderer.ytd-app.style-scope

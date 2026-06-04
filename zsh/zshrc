@@ -34,21 +34,28 @@ setopt share_history					# share command history data
 #
 #	Dirstack
 #
-DIRSTACKSIZE=10		# tell ZSH to save 10 entries
-DIRSTACKFILE=$ZDOTDIR/dirstack
-[[ ! -f $DIRSTACKFILE ]] && touch $DIRSTACKFILE
-setopt auto_pushd			# Automatically add folders to dirstack on cd
-setopt pushd_ignore_dups
-setopt pushd_minus			# Swap '+' & '-'
+# DIRSTACKSIZE=10		# tell ZSH to save 10 entries
+# DIRSTACKFILE=$ZDOTDIR/dirstack
+# [[ ! -f $DIRSTACKFILE ]] && touch $DIRSTACKFILE
+# setopt auto_pushd			# Automatically add folders to dirstack on cd
+# setopt pushd_ignore_dups
+# setopt pushd_minus			# Swap '+' & '-'
 
-# Save dirstack on exit
-function zshexit() {
-	print -l ${(u)dirstack} >! $DIRSTACKFILE
-}
-# And load it on startup
-dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )						# load it ( the (f) means split on whitespace (characters defined in $IFS)
-[[ -d $dirstack[1] ]] && cd $dirstack[1] && cd $OLDPWD		# Preload #OLDPWD. Arrays are 1 indexed??
-
+# Save dirstack on exit - use TRAPEXIT instead
+# function TRAPEXIT() {
+# 	local dirs=($PWD ${(u)dirstack})
+#	dirs=(${dirs:#$HOME})	# Remove $HOME from the list
+#	print -l $dirs >! $DIRSTACKFILE
+# }
+# 
+# # Load dirstack on startup
+# if [[ -f $DIRSTACKFILE ]]; then
+# 	echo "Loading dirstack"
+# 	dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
+# 	dirstack=( ${(u)dirstack[@]:#$HOME}(N-/) )	# Remove any non-existent directories
+# 	# [[ -d ${dirstack[1]} ]] && cd -q ${dirstack[1]} # Change to the first directory if it exists
+# 	[[ -d $dirstack[1] ]] && cd $dirstack[1] && cd $OLDPWD
+# fi
 
 
 
@@ -64,6 +71,7 @@ export LESSHISTFILE=/dev/null           # Stop less creating a history file
 
 
 export DATE=$(date +'%Y-%m-%d')
+export YESTERDATE=$(date --date=yesterday +'%Y-%m-%d')
 
 alias bc='bc -q'
 alias dl='trash'
@@ -77,8 +85,12 @@ alias vi=nvim
 alias scr='cd $(mktemp -d)'
 alias ,tv="nvim $HOME/Documents/Notes/Tv.txt"
 alias ,films="nvim $HOME/Documents/Notes/Films.txt"
+alias ,comics="nvim $HOME/Documents/Notes/Comics.txt"
 alias ,diary="nvim $HOME/Documents/Diary/$DATE.txt"
+alias ,diary-1="nvim $HOME/Documents/Diary/$YESTERDATE.txt"
 alias ,health="nvim $HOME/Documents/Health/$DATE.txt"
+alias ,health-1="nvim $HOME/Documents/Health/$YESTERDATE.txt"
+alias ,find="$HOME/Coding/Website/up new find"
 
 
 alias cpy=wl-copy
@@ -90,6 +102,9 @@ zle -N bracketed-paste bracketed-paste-magic
 
 export PATH=$HOME/.cargo/bin:$PATH	# Rust
 export PATH=$HOME/.local/bin:$PATH	# Python
+export PATH=~/Android/Sdk/cmdline-tools/latest/bin:~/Android/Sdk/emulator:~/Android/Sdk/platform-tools:$PATH
+export ANDROID_HOME=~/Android/Sdk
+export CLAUDE_CODE_OAUTH_TOKEN=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
 
 source "$HOME/Coding/dotfiles/zsh/completion.zsh"
 source "$HOME/Coding/dotfiles/zsh/keybindings.zsh"

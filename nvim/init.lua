@@ -133,8 +133,9 @@ local function map(mode, lhs, rhs, opts)		-- convenience function
 	vim.keymap.set(mode, lhs, rhs, options)
 end
 
-local function feedkeys(key, mode)				-- convenience function
-	api.nvim_feedkeys(api.nvim_replace_termcodes(key, true, true, true), mode, true)
+local function feedkeys(keys, mode)				-- convenience function
+	if not mode then mode = "n" end
+	api.nvim_feedkeys(api.nvim_replace_termcodes(keys, true, true, true), mode, false)
 end
 
 map("n", "zO", "zCzO")
@@ -167,6 +168,22 @@ map("n", "a", "")
 map("n", "A", "")
 map("n", "<C-i>", "A")
 map({"n", "v"}, "$", "$l", {remap = true})
+map("n", "e", function()
+	col = vim.api.nvim_win_get_cursor(0)[2]
+	if vim.api.nvim_get_current_line():sub(col+2,col+2) == " " then
+		feedkeys("l")
+	else
+		feedkeys("el")
+	end
+end)
+map("n", "E", function()
+	col = vim.api.nvim_win_get_cursor(0)[2]
+	if vim.api.nvim_get_current_line():sub(col+2,col+2) == " " then
+		feedkeys("l")
+	else
+		feedkeys("El")
+	end
+end)
 
 -- Unified Scrolling
 map("", "<C-k>", "10gk", {remap = true})
