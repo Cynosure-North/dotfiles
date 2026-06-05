@@ -167,6 +167,7 @@ map("n", "q?", "")
 map("n", "a", "")
 map("n", "A", "")
 map("n", "<C-i>", "A")
+map("n", "<C-s-o>", "<C-i>")	-- TODO: This isn't working
 map({"n", "v"}, "$", "$l", {remap = true})
 map("n", "e", function()
 	col = vim.api.nvim_win_get_cursor(0)[2]

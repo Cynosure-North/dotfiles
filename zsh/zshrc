@@ -104,7 +104,6 @@ export PATH=$HOME/.cargo/bin:$PATH	# Rust
 export PATH=$HOME/.local/bin:$PATH	# Python
 export PATH=~/Android/Sdk/cmdline-tools/latest/bin:~/Android/Sdk/emulator:~/Android/Sdk/platform-tools:$PATH
 export ANDROID_HOME=~/Android/Sdk
-export CLAUDE_CODE_OAUTH_TOKEN=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
 
 source "$HOME/Coding/dotfiles/zsh/completion.zsh"
 source "$HOME/Coding/dotfiles/zsh/keybindings.zsh"
