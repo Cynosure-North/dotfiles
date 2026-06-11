@@ -162,6 +162,9 @@ map("n", "q:", "")	-- Disable command line window (:<C-f> still works)
 map("n", "q/", "")
 map("n", "q?", "")
 
+-- Comments
+map("v", "<C-/>", "gc")	-- TODO: ctrl+/ doesn't work for terminal reasons, find a different mapping	-- TODO: ctrl+/ doesn't work for terminal reasons, find a different mapping	-- TODO: ctrl+/ doesn't work for terminal reasons, find a different mapping	-- TODO: ctrl+/ doesn't work for terminal reasons, find a different mapping	-- TODO: ctrl+/ doesn't work for terminal reasons, find a different mapping
+map("n", "<C-/>", "gcc")
 
 -- Evilish mode
 map("n", "a", "")
@@ -171,7 +174,8 @@ map("n", "<C-s-o>", "<C-i>")	-- TODO: This isn't working
 map({"n", "v"}, "$", "$l", {remap = true})
 map("n", "e", function()
 	col = vim.api.nvim_win_get_cursor(0)[2]
-	if vim.api.nvim_get_current_line():sub(col+2,col+2) == " " then
+	line = vim.api.nvim_get_current_line()
+	if  line:sub(col+1,col+1):match("%S") and line:sub(col+2,col+2):match("%s") then
 		feedkeys("l")
 	else
 		feedkeys("el")
@@ -179,7 +183,8 @@ map("n", "e", function()
 end)
 map("n", "E", function()
 	col = vim.api.nvim_win_get_cursor(0)[2]
-	if vim.api.nvim_get_current_line():sub(col+2,col+2) == " " then
+	line = vim.api.nvim_get_current_line()
+	if  line:sub(col+1,col+1):match("%S") and line:sub(col+2,col+2):match("%s") then
 		feedkeys("l")
 	else
 		feedkeys("El")
@@ -440,6 +445,7 @@ return require("packer").startup(function(use)		-- Install packages
 	use "lukas-reineke/virt-column.nvim"				-- Show character in virtual column
 	use "tpope/vim-vinegar"								-- Netrw improvements
 	use "tpope/vim-characterize"						-- More info with ga
+	use "tpope/vim-commentary"							-- gcc to comment line
 	use "rmagatti/auto-session"							-- Automatic session management
 	use "svermeulen/vim-cutlass"						-- Make delete actually delete
 
