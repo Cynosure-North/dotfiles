@@ -116,3 +116,4 @@ source "$HOME/Coding/dotfiles/zsh/theme.zsh"
 # Unified history Buggy
 # Slightly slow startup
 # Snippets
+. "/home/north/.deno/env"

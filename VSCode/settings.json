@@ -160,4 +160,8 @@
     "avdmanager.sdkPath": "/home/north/Android/Sdk",
     "explorer.excludeGitIgnore": true,
     "workbench.activityBar.location": "top",
+    "workbench.view.showQuietly": {
+        "workbench.panel.output": true
+    },
+    "diffEditor.ignoreTrimWhitespace": false,
 }
