@@ -90,7 +90,7 @@ alias ,diary="nvim $HOME/Documents/Diary/$DATE.txt"
 alias ,diary-1="nvim $HOME/Documents/Diary/$YESTERDATE.txt"
 alias ,health="nvim $HOME/Documents/Health/$DATE.txt"
 alias ,health-1="nvim $HOME/Documents/Health/$YESTERDATE.txt"
-alias ,find="$HOME/Coding/Website/up new find"
+alias ,find="$HOME/Coding/Website/find_main"
 
 
 alias cpy=wl-copy
@@ -116,4 +116,3 @@ source "$HOME/Coding/dotfiles/zsh/theme.zsh"
 # Unified history Buggy
 # Slightly slow startup
 # Snippets
-. "/home/north/.deno/env"

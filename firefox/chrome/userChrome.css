@@ -159,6 +159,10 @@ html:hover:has(#browser:not(:hover)) {
 		padding-left: 0 !important;
 		margin-right: 0 !important;
 	}
+
+	#urlbar {
+		width: var(--urlbar-width) !important;
+	}
 }
 
 
@@ -259,7 +263,7 @@ html:hover:has(#browser:not(:hover)) {
 }
 
 #urlbar {
-	padding-bottom: 6px;
+	width: calc(var(--urlbar-width) - 12px) !important;
 }
 
 #urlbar[breakout-extend] {

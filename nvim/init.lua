@@ -1,10 +1,10 @@
 -- TODO
--- Prose more
+-- Prose mode
 --	- Thesaurus
 --	- Dictionary Lookup
+--	- Hide line numbers
+--	- Soft wrap at 80 characters
 -- When moving from a split, to a side with 2 splits, go back to the most recently visited one
--- Incremental search colors - highlight cursor/current match
--- Don't spellcheck capitalised acronyms
 -- Replace Packer
 local opt = vim.opt
 local api = vim.api
@@ -39,7 +39,7 @@ opt.completeopt = "menuone,longest"		-- Insert mode completion
 -- Colors
 opt.termguicolors = true				-- Truecolor support
 -- cmd[[colorscheme selenized_bw]]			-- jan-warchol/selenized
---opt.background = "dark"					-- Color scheme
+-- opt.background = "dark"					-- Color scheme
 -- Mouse
 opt.mouse = "nv"						-- Mouse support
 opt.mousemodel = "popup_setpos"			-- TODO: customise popup menu
@@ -58,29 +58,24 @@ opt.display = { "lastline", "uhex" }	-- Truncate and show hex codes for unprinta
 opt.cpoptions:remove('_')				-- Fix cw inconsistency
 opt.cpoptions:append('M')				-- Ignore escaped brackets for matchpairs
 opt.splitright = true					-- New windows on the right
+opt.clipboard:append("unnamedplus")		-- Use system clipboard
 -- Show indents
 opt.list = true
-opt.listchars = { tab = '│ ', lead = '·', trail = '៖', nbsp = '␣', precedes = '←', extends= '→' }		-- TODO: use conceal so it hides the ៖ with when typing, TODO: find a way to hide trailing whitespace before comments
+opt.listchars = { tab = '  ', leadtab = '│ ', lead = '·', trail = '៖', nbsp = '␣', precedes = '←', extends= '→' }		-- TODO: use conceal or autocmd so it hides the ៖ with when typing
 -- Syntax highlighting
-cmd([[syn match AcronymNoSpell "\<\(\u\|\d\)\{3,}s\?\>" contains=@NoSpell]])	-- Don't spellcheck acronyms, TODO: Doesn't work
-cmd([[syn match UrlNoSpell "\w\+:\/\/\S\+" contains=@NoSpell]])					-- Or URLs		TODO: Doesn't work in text files
+-- cmd([[syn match AcronymNoSpell "\<\(\u\|\d\)\{3,}s\?\>" contains=@NoSpell]])	-- Don't spellcheck acronyms, TODO: Doesn't work
+-- cmd([[syn match UrlNoSpell "\w\+:\/\/\S\+" contains=@NoSpell]])					-- Or URLs		TODO: Doesn't work in text files
 vim.api.nvim_set_hl(0, "SpellCap", {sp="Blue", undercurl=true})		-- TODO: Doesn't work
 
 -- Evilish mode
 opt.virtualedit = "block,onemore"
 opt.selection = "exclusive"
-opt.guicursor = "n-v-c-sm:ver20,i-ci:ver10-Cursor-blinkwait200-blinkon250-blinkoff200,r-cr-o:hor20"	-- TODO
-
+opt.guicursor = "n-v-c-sm:ver20,i-ci:ver10-Cursor-blinkwait200-blinkon250-blinkoff200,r-cr-o:hor20"	-- TODO: In gnome-terminal you can't set the width of the cursor
 opt.scrolloff = 5						-- Keep cursor 5 rows from the edges
 opt.sidescroll = 1						-- Scroll one column at a time
 opt.sidescrolloff = 5					-- Keep cursor 5 columns from the edges
 
 -- Netrw
--- g.netrw_keepdir = 1
--- g.netrw_banner = 0
--- g.netrw_liststyle = 3
-g.netrw_localcopydircmd = 'cp -r'
--- TODO: Delete
 g.netrw_list_hide = "\\(^\\|\\s\\s\\)\\zs\\.\\S\\+"		-- Hide dotfiles (gh to toggle)
 g.netrw_browsex_viewer	= "xdg-open"	-- TODO: If it fails it should show up in a hit enter window, not a buffer
 
@@ -88,7 +83,6 @@ g.netrw_browsex_viewer	= "xdg-open"	-- TODO: If it fails it should show up in a 
 ----
 --		Auto Commands
 ----
-
 api.nvim_create_autocmd( 'TextYankPost',		-- Highlight yanked text
 	{ callback = function() vim.highlight.on_yank({higroup="Visual"}) end })
 api.nvim_create_autocmd( 'CmdlineLeave', 			-- Clear command line automatically
@@ -113,36 +107,36 @@ api.nvim_create_autocmd( 'BufEnter',			-- Only show column at 80 lines in editab
 		end
 	end })
 
-local function setupWriting()
-	opt.wrap = true
-	opt.list = false
-	opt.linebreak = true
-	opt.colorcolumn = ""
-	opt.foldenable = false
-	-- Also disable xiyaowong/nvim-cursorword
-end
-api.nvim_create_autocmd( 'BufEnter',			-- Wrap in text files
-{ pattern = {"*.md", "*.adoc", "*.txt", "{}"}, callback = setupWriting})
 
 ----
 --		Mappings
 ----
-local function map(mode, lhs, rhs, opts)		-- convenience function
+
+-- convenience functions
+local function map(mode, lhs, rhs, opts)
 	local options = {remap = false}
 	if opts then options = vim.tbl_extend('force', options, opts) end
 	vim.keymap.set(mode, lhs, rhs, options)
 end
 
-local function feedkeys(keys, mode)				-- convenience function
+local function feedkeys(keys, mode)
 	if not mode then mode = "n" end
 	api.nvim_feedkeys(api.nvim_replace_termcodes(keys, true, true, true), mode, false)
 end
 
+-- Misc
 map("n", "zO", "zCzO")
+map("", "j", "gj", {remap = true})
+map("", "k", "gk", {remap = true})
+map("n", "q:", "")	-- Disable command line window (:<C-f> still works)
+map("n", "q/", "")
+map("n", "q?", "")
+-- Actually delete
 map("", "x", "d")
 map("n", "xx", "dd")
 map("v", "X", "D")
 map("n", "s", "ch")
+-- Split manipulation
 map("n", "<C-w><C-h>", "<C-w>100h")		-- Hold ctrl to jump to the end
 map("n", "<C-w><C-j>", "<C-w>100j")
 map("n", "<C-w><C-k>", "<C-w>100k")
@@ -156,24 +150,34 @@ map("n", "<A-j>", "<Esc><C-w>j")
 map("n", "<A-k>", "<Esc><C-w>k")
 map("n", "<A-l>", "<Esc><C-w>l")
 map("n", "<C-w>n", ":vnew<Enter>")
-map("", "j", "gj", {remap = true})
-map("", "k", "gk", {remap = true})
-map("n", "q:", "")	-- Disable command line window (:<C-f> still works)
-map("n", "q/", "")
-map("n", "q?", "")
-
 -- Comments
-map("v", "<C-/>", "gc")	-- TODO: ctrl+/ doesn't work for terminal reasons, find a different mapping	-- TODO: ctrl+/ doesn't work for terminal reasons, find a different mapping	-- TODO: ctrl+/ doesn't work for terminal reasons, find a different mapping	-- TODO: ctrl+/ doesn't work for terminal reasons, find a different mapping	-- TODO: ctrl+/ doesn't work for terminal reasons, find a different mapping
-map("n", "<C-/>", "gcc")
+map("v", "<C-_>", "gc")	-- TODO: ctrl+/ doesn't work for terminal reasons, find a different mapping
+map("n", "<C-_>", "gcc")
 
 -- Evilish mode
+map("i", "<Esc>", function()
+	if vim.api.nvim_win_get_cursor(0)[2] == 0 then
+		feedkeys("<Esc>")
+	else
+		feedkeys("<Esc>l")
+	end
+
+end)
 map("n", "a", "")
 map("n", "A", "")
 map("n", "<C-i>", "A")
 map("n", "<C-s-o>", "<C-i>")	-- TODO: This isn't working
 map({"n", "v"}, "$", "$l")
-map({"n", "v"}, "p", "P")
+map({"n", "v"}, "p", function()
+	if vim.fn.getregtype(vim.v.register):match("V") then
+		feedkeys("p")
+	else
+		feedkeys("P")
+	end
+end)
 map({"n", "v"}, "P", "gP")
+map("n", "t", "")
+map("n", "T", "")
 map("n", "e", function()
 	col = vim.api.nvim_win_get_cursor(0)[2]
 	line = vim.api.nvim_get_current_line()
@@ -197,12 +201,9 @@ end)
 map("", "<C-k>", "10gk", {remap = true})
 map("", "<C-j>", "10gj", {remap = true})
 map("", "<C-u>", "")
-map("", "<C-u>", "")
-map("", "<C-f>", "")
 map("", "<C-f>", "")
 map("", "<C-e>", "")
 map("", "<C-y>", "")
-map("i", "<Esc>", "<Esc>l")
 
 -- VSCodium
 if vim.g.vscode then
@@ -217,168 +218,8 @@ if vim.g.vscode then
 	vim.keymap.set('n', 'za', function() vscode.call("editor.toggleFold") end, { noremap = true, silent = true })
 end
 
-
-fn.digraph_setlist({
-	{ "sa", 'ₐ' },
-	{ "as", 'ₐ' },
-	{ "se", 'ₑ' },
-	{ "es", 'ₑ' },
-	{ "sh", 'ₕ' },
-	{ "hs", 'ₕ' },
-	{ "si", 'ᵢ' },
-	{ "is", 'ᵢ' },
-	{ "sj", 'ⱼ' },
-	{ "js", 'ⱼ' },
-	{ "sk", 'ₖ' },
-	{ "ks", 'ₖ' },
-	{ "sl", 'ₗ' },
-	{ "ls", 'ₗ' },
-	{ "sm", 'ₘ' },
-	{ "ms", 'ₘ' },
-	{ "sn", 'ₙ' },
-	{ "ns", 'ₙ' },
-	{ "so", 'ₒ' },
-	{ "os", 'ₒ' },
-	{ "sp", 'ₚ' },
-	{ "ps", 'ₚ' },
-	{ "sr", 'ᵣ' },
-	{ "rs", 'ᵣ' },
-	{ "ss", 'ₛ' },
-	{ "ss", 'ₛ' },
-	{ "st", 'ₜ' },
-	{ "ts", 'ₜ' },
-	{ "su", 'ᵤ' },
-	{ "us", 'ᵤ' },
-	{ "sv", 'ᵥ' },
-	{ "vs", 'ᵥ' },
-	{ "sx", 'ₓ' },
-	{ "xs", 'ₓ' },
-	{ "Sa", 'ᵃ' },
-	{ "Sa", 'ᵃ' },
-	{ "Sb", 'ᵇ' },
-	{ "bS", 'ᵇ' },
-	{ "Sc", 'ᶜ' },
-	{ "cS", 'ᶜ' },
-	{ "Sd", 'ᵈ' },
-	{ "dS", 'ᵈ' },
-	{ "Se", 'ᵉ' },
-	{ "eS", 'ᵉ' },
-	{ "Sf", 'ᶠ' },
-	{ "fS", 'ᶠ' },
-	{ "Sg", 'ᵍ' },
-	{ "gS", 'ᵍ' },
-	{ "Sh", 'ʰ' },
-	{ "hS", 'ʰ' },
-	{ "Si", 'ⁱ' },
-	{ "iS", 'ⁱ' },
-	{ "Sj", 'ʲ' },
-	{ "jS", 'ʲ' },
-	{ "Sk", 'ᵏ' },
-	{ "kS", 'ᵏ' },
-	{ "Sl", 'ˡ' },
-	{ "lS", 'ˡ' },
-	{ "Sm", 'ᵐ' },
-	{ "mS", 'ᵐ' },
-	{ "Sn", 'ⁿ' },
-	{ "nS", 'ⁿ' },
-	{ "So", 'ᵒ' },
-	{ "oS", 'ᵒ' },
-	{ "Sp", 'ᵖ' },
-	{ "pS", 'ᵖ' },
-	{ "Sq", '𐞥' },
-	{ "qS", '𐞥' },
-	{ "Sr", 'ʳ' },
-	{ "rS", 'ʳ' },
-	{ "Ss", 'ˢ' },
-	{ "sS", 'ˢ' },
-	{ "St", 'ᵗ' },
-	{ "tS", 'ᵗ' },
-	{ "Su", 'ᵘ' },
-	{ "uS", 'ᵘ' },
-	{ "Sv", 'ᵛ' },
-	{ "vS", 'ᵛ' },
-	{ "Sw", 'ʷ' },
-	{ "wS", 'ʷ' },
-	{ "Sx", 'ˣ' },
-	{ "xS", 'ˣ' },
-	{ "Sy", 'ʸ' },
-	{ "yS", 'ʸ' },
-	{ "Sz", 'ᶻ' },
-	{ "zS", 'ᶻ' },
-	{ "SA", 'ᴬ' },
-	{ "AS", 'ᴬ' },
-	{ "SB", 'ᴮ' },
-	{ "BS", 'ᴮ' },
-	{ "SC", 'ꟲ' },
-	{ "CS", 'ꟲ' },
-	{ "SD", 'ᴰ' },
-	{ "DS", 'ᴰ' },
-	{ "SE", 'ᴱ' },
-	{ "ES", 'ᴱ' },
-	{ "SF", 'ꟳ' },
-	{ "FS", 'ꟳ' },
-	{ "SG", 'ᴳ' },
-	{ "GS", 'ᴳ' },
-	{ "SH", 'ᴴ' },
-	{ "HS", 'ᴴ' },
-	{ "SI", 'ᴵ' },
-	{ "IS", 'ᴵ' },
-	{ "SJ", 'ᴶ' },
-	{ "JS", 'ᴶ' },
-	{ "SK", 'ᴷ' },
-	{ "KS", 'ᴷ' },
-	{ "SL", 'ᴸ' },
-	{ "LS", 'ᴸ' },
-	{ "SM", 'ᴹ' },
-	{ "MS", 'ᴹ' },
-	{ "SN", 'ᴺ' },
-	{ "NS", 'ᴺ' },
-	{ "SO", 'ᴼ' },
-	{ "OS", 'ᴼ' },
-	{ "SP", 'ᴾ' },
-	{ "PS", 'ᴾ' },
-	{ "SQ", 'ꟴ' },
-	{ "QS", 'ꟴ' },
-	{ "SR", 'ᴿ' },
-	{ "RS", 'ᴿ' },
-	{ "ST", 'ᵀ' },
-	{ "TS", 'ᵀ' },
-	{ "SU", 'ᵁ' },
-	{ "US", 'ᵁ' },
-	{ "SV", 'ⱽ' },
-	{ "VS", 'ⱽ' },
-	{ "SW", 'ᵂ' },
-	{ "WS", 'ᵂ' },
-	{ "S0", '⁰' },
-	{ "0S", '⁰' },
-	{ "S1", '¹' },
-	{ "1S", '¹' },
-	{ "S2", '²' },
-	{ "2S", '²' },
-	{ "S3", '³' },
-	{ "3S", '³' },
-	{ "S4", '⁴' },
-	{ "4S", '⁴' },
-	{ "S5", '⁵' },
-	{ "5S", '⁵' },
-	{ "S6", '⁶' },
-	{ "6S", '⁶' },
-	{ "S7", '⁷' },
-	{ "7S", '⁷' },
-	{ "S8", '⁸' },
-	{ "8S", '⁸' },
-	{ "S9", '⁹' },
-	{ "9S", '⁹' },
-	{ "S+", '⁺' },
-	{ "+S", '⁺' },
-	{ "S-", '⁻' },
-	{ "-S", '⁻' },
-	{ "S=", '⁼' },
-	{ "=S", '⁼' },
-	{ "S(", '⁽' },
-	{ "(S", '⁽' },
-	{ "S)", '⁾' }
-})
+-- Mouse
+-- map("n", "<LeftMouse>", "<LeftMouse>i", {remap=false})	-- TODO: Left click to insert there, currently prevents drag to select which is the problem
 
 
 -- simrat39/symbols-outline.nvim

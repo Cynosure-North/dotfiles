@@ -164,4 +164,5 @@
         "workbench.panel.output": true
     },
     "diffEditor.ignoreTrimWhitespace": false,
+    "todo-tree.ripgrep.ripgrep": "/usr/bin/rg",
 }

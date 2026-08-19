@@ -46,7 +46,7 @@
 	{
 		"key": "ctrl+b",
 		"command": "-vscode-neovim.ctrl-b",
-		"when": "editorTextFocus && neovim.ctrlKeysNormal.b && neovim.init && neovim.mode != 'insert' && editorLangId not in 'neovim.editorLangIdExclusions'"
+		"when": "(editorTextFocus || terminalFocus) && neovim.ctrlKeysNormal.b && neovim.init && neovim.mode != 'insert' && editorLangId not in 'neovim.editorLangIdExclusions'"
 	},
 	{
 		"key": "ctrl+shift+c",
@@ -360,5 +360,5 @@
 		"key": "tab",
 		"command": "quickInput.next",
 		"when": "inQuickInput && quickInputType == 'quickPick' || inQuickInput && quickInputType == 'quickTree'"
-	}
+	},
 ]
