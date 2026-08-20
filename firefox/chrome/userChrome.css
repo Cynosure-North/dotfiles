@@ -23,6 +23,25 @@
 @media screen and (min-width:850px) {
 
 	/* One row layout */
+	#navigator-toolbox {
+		flex-direction: row-reverse !important;
+		justify-content: center;
+	}
+
+
+	#toolbar-menubar menu {
+		font-size: 1.5em;
+	}
+
+	#toolbar-menubar[inactive=true] {
+		width: 0;
+	}
+
+	#toolbar-menubar:not([inactive])~#nav-bar,
+	#toolbar-menubar:not([inactive])~#TabsToolbar {
+		display: none !important;
+	}
+
 	#nav-bar {
 		margin-top: calc(0px - var(--tab-min-height) - var(--tab-block-margin)) !important;
 		height: calc(var(--tab-min-height) + var(--tab-block-margin) * 1px);
@@ -33,15 +52,17 @@
 		margin-inline: 0 !important;
 	}
 
+
+
 	@media screen and (min-width:850px) and (max-width:1324px) {
 
 		/* Both the tabs space and the navbar will grow */
 		#TabsToolbar {
-			margin-left: calc(var(--NavbarWidth) * 1vw) !important;
+			width: calc(100vw - var(--NavbarWidth) * 1vw) !important;
 		}
 
-		#nav-bar {
-			margin-right: calc(100vw - var(--NavbarWidth) * 1vw) !important;
+		#nav-bardt {
+			width: calc(var(--NavbarWidth) * 1vw) !important;
 		}
 
 		#urlbar[breakout-extend] {
@@ -53,11 +74,11 @@
 
 		/* Only the tabs space will grow from here */
 		#TabsToolbar {
-			margin-left: calc(1325px / 100 * var(--NavbarWidth)) !important;
+			width: calc(100vw - calc(1325px / 100 * var(--NavbarWidth))) !important;
 		}
 
 		#nav-bar {
-			margin-right: calc(100vw - calc(1325px / 100 * var(--NavbarWidth))) !important;
+			width: calc(1325px / 100 * var(--NavbarWidth)) !important;
 		}
 
 		#urlbar[breakout-extend] {
@@ -136,7 +157,10 @@
 	opacity: 0;
 	padding: 0 !important;
 }
-#identity-permission-box { padding-inline: 0 !important; }
+
+#identity-permission-box {
+	padding-inline: 0 !important;
+}
 
 #urlbar-container {
 	padding-left: 6px;
@@ -146,22 +170,29 @@
 html:hover:has(#browser:not(:hover)) {
 
 	& :is(#PanelUI-button,
-		#nav-bar-customization-target :is(
-			#forward-button,
+		#nav-bar-customization-target :is(#forward-button,
 			#back-button,
 			#reload-button)) {
 		visibility: visible;
 	}
 
-	#stop-reload-button { padding-left: 0; }
-	#back-button { margin-left: 4px; }
+	#stop-reload-button {
+		padding-left: 0;
+	}
+
+	#back-button {
+		margin-left: 4px;
+	}
 
 	#unified-extensions-button,
 	#identity-permission-box[hasPermissions] {
 		width: initial;
 		opacity: 1;
 	}
-	#identity-permission-box[hasPermissions] { padding-inline: var(--urlbar-icon-padding) !important; }
+
+	#identity-permission-box[hasPermissions] {
+		padding-inline: var(--urlbar-icon-padding) !important;
+	}
 
 	#urlbar-container {
 		padding-left: 0 !important;
@@ -268,7 +299,7 @@ html:hover:has(#browser:not(:hover)) {
 
 /* TODO: It seems like breakout-extend is always true, and yet it's an important
  * selector, why? Is it just for specificity? */
-#urlbar:not(open) {		
+#urlbar:not(open) {
 	width: calc(var(--urlbar-width) - 12px) !important;
 }
 
@@ -350,30 +381,50 @@ tabs#tabbrowser-tabs {
 #tracking-protection-icon-container,
 #firefox-view-button,
 #picture-in-picture-button,
-.search-panel-one-offs-header,					 /* 'This time search with' */
-#urlbar-anon-search-settings,					 /* Settings in the search box */
-#private-browsing-indicator-with-label,			 /* Private label */
-toolbarbutton#scrollbutton-up,					 /* Scroll indicators when the window is too narrow */
+.search-panel-one-offs-header,
+/* 'This time search with' */
+#urlbar-anon-search-settings,
+/* Settings in the search box */
+#private-browsing-indicator-with-label,
+/* Private label */
+toolbarbutton#scrollbutton-up,
+/* Scroll indicators when the window is too narrow */
 toolbarbutton#scrollbutton-down,
-#userContext-icons,								 /* Container tab */
-.titlebar-buttonbox-container,					 /* Close, maximise, etc buttons */
-#tabs-newtab-button,							 /* New tab */
-#new-tab-button,								 /* IDK why there's 2 */
-.titlebar-spacer[type="post-tabs"],				 /* Space between down arrow and quit */
-.titlebar-spacer[type="pre-tabs"],				 /* Space on the left before tabs (only noticeable in 2 line mode) */
+#userContext-icons,
+/* Container tab */
+.titlebar-buttonbox-container,
+/* Close, maximise, etc buttons */
+#tabs-newtab-button,
+/* New tab */
+#new-tab-button,
+/* IDK why there's 2 */
+.titlebar-spacer[type="post-tabs"],
+/* Space between down arrow and quit */
+.titlebar-spacer[type="pre-tabs"],
+/* Space on the left before tabs (only noticeable in 2 line mode) */
 #save-to-pocket-button,
-toolbarspring,									 /* Toolbar spacers */
+toolbarspring,
+/* Toolbar spacers */
 #fullscreen-warning,
-#star-button-box,								 /* Bookmark button */
-#pageAction-urlbar-_testpilot-containers,		 /* Containers button */
-#fxa-toolbar-menu-button,						 /* Mozilla account */
-#nav-bar-overflow-button,						 /* Show the things I've hidden */
-#urlbar-go-button,								 /* Search/goto button in url bar (Pointless)*/
-#blocked-permissions-container,					 /* No camera etc. Still shows the switch dropdown */
-#downloads-button,								 /* Downloads popup & Button */
+#star-button-box,
+/* Bookmark button */
+#pageAction-urlbar-_testpilot-containers,
+/* Containers button */
+#fxa-toolbar-menu-button,
+/* Mozilla account */
+#nav-bar-overflow-button,
+/* Show the things I've hidden */
+#urlbar-go-button,
+/* Search/goto button in url bar (Pointless)*/
+#blocked-permissions-container,
+/* No camera etc. Still shows the switch dropdown */
+#downloads-button,
+/* Downloads popup & Button */
 #home-button,
-#pageActionButton,							 	/* Add to container dropdown */
-.urlbarView-button-menu,					 	/* 3 dots in search results */
+#pageActionButton,
+/* Add to container dropdown */
+.urlbarView-button-menu,
+/* 3 dots in search results */
 .private-browsing-indicator-with-label,
 
 
@@ -458,12 +509,15 @@ toolbarspring,									 /* Toolbar spacers */
 .unified-extensions-context-menu-report-extension,
 
 /* Misc extensions */
-#_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root,				 /* Bitwarden */
+#_446900e4-71c2-419f-a6a7-df9c091e268b_-menuitem-_root,
+/* Bitwarden */
 #_testpilot-containers-menuitem-20,
-#ublock0_raymondhill_net-menuitem-_uBlock0-blockElement,			 /* uBlock - block element */
+#ublock0_raymondhill_net-menuitem-_uBlock0-blockElement,
+/* uBlock - block element */
 menu[label*="Zotero"],
 menuitem[label*="Zotero"],
-#pageAction-urlbar-jid1-xufzosoflzsoxg_jetpack,	 /* RES badge */
+#pageAction-urlbar-jid1-xufzosoflzsoxg_jetpack,
+/* RES badge */
 
 
 #dummy {
