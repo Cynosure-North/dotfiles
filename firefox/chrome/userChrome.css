@@ -14,6 +14,10 @@
 	#urlbar[breakout-extend] {
 		width: calc(100vw - 2 * var(--urlbar-margin-inline) + 2 * var(--urlbar-container-padding)) !important;
 	}
+
+	#nav-bar {
+		padding: 0 4px;
+	}
 }
 
 @media screen and (min-width:850px) {
@@ -94,6 +98,10 @@
 	counter-increment: tabCount;
 }
 
+#alltabs-button {
+	padding-right: 4px;
+}
+
 #alltabs-button>.toolbarbutton-badge-stack::before {
 	content: counter(tabCount);
 	position: absolute;
@@ -158,10 +166,6 @@ html:hover:has(#browser:not(:hover)) {
 	#urlbar-container {
 		padding-left: 0 !important;
 		margin-right: 0 !important;
-	}
-
-	#urlbar {
-		width: var(--urlbar-width) !important;
 	}
 }
 
@@ -262,7 +266,9 @@ html:hover:has(#browser:not(:hover)) {
 	box-shadow: none !important;
 }
 
-#urlbar {
+/* TODO: It seems like breakout-extend is always true, and yet it's an important
+ * selector, why? Is it just for specificity? */
+#urlbar:not(open) {		
 	width: calc(var(--urlbar-width) - 12px) !important;
 }
 
