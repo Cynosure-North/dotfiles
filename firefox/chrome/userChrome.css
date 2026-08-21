@@ -89,6 +89,7 @@
 
 #PanelUI-button {
 	order: 1;
+	margin-left: 2px;
 }
 
 #nav-bar-customization-target {
@@ -193,11 +194,6 @@ html:hover:has(#browser:not(:hover)) {
 	#identity-permission-box[hasPermissions] {
 		padding-inline: var(--urlbar-icon-padding) !important;
 	}
-
-	#urlbar-container {
-		padding-left: 0 !important;
-		margin-right: 0 !important;
-	}
 }
 
 
@@ -246,6 +242,16 @@ html:hover:has(#browser:not(:hover)) {
 
 .unified-extensions-item-action-button .toolbarbutton-badge-stack {
 	padding: 4px !important;
+}
+
+/* Pure jank, but it seems the position of the popup is linked to the position 
+ * of the button, and I can't figure out how to change the relative position */
+#unified-extensions-button[open] {
+	position: fixed;
+	top: -20px;
+	left: 150px;
+	width: 0 !important;	/* Stops it moving when the urlbar buttons expand/contract */
+	opacity: 0 !important;
 }
 
 
