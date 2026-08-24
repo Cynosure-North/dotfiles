@@ -89,8 +89,8 @@ api.nvim_create_autocmd( 'CmdlineLeave', 			-- Clear command line automatically
 	{ callback = function()	-- NOTE: Unfortunately no way to clear error messages currenntly
 		local cmdline_char = fn.expand("<afile>")	-- Store it because it's empty when deferred
 		vim.defer_fn(function()	
-			if cmdline_char == ':' then 
-				print " " 
+			if cmdline_char == ':' then
+				print " "
 			end
 		end, 2000)
 	end })
@@ -107,6 +107,16 @@ api.nvim_create_autocmd( 'BufEnter',			-- Only show column at 80 lines in editab
 		end
 	end })
 
+local function setupWriting()
+	opt.wrap = true
+	opt.list = false
+	opt.linebreak = true
+	opt.colorcolumn = ""
+	opt.foldenable = false
+	-- Also disable xiyaowong/nvim-cursorword
+end
+api.nvim_create_autocmd( 'BufEnter',			-- Wrap in text files
+{ pattern = {"*.md", "*.adoc", "*.txt", "{}"}, callback = setupWriting})
 
 ----
 --		Mappings
