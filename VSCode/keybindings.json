@@ -361,4 +361,36 @@
 		"command": "quickInput.next",
 		"when": "inQuickInput && quickInputType == 'quickPick' || inQuickInput && quickInputType == 'quickTree'"
 	},
+	{
+		"key": "ctrl+b",
+		"command": "-vscode-neovim.send",
+		"when": "editorTextFocus && neovim.ctrlKeysInsert.b && neovim.init && neovim.mode == 'insert' && editorLangId not in 'neovim.editorLangIdExclusions'"
+	},
+	{
+		"key": "ctrl+b",
+		"command": "-vscode-neovim.ctrl-b",
+		"when": "editorTextFocus && neovim.ctrlKeysNormal.b && neovim.init && neovim.mode != 'insert' && editorLangId not in 'neovim.editorLangIdExclusions'"
+	},
+	{
+		"key": "ctrl+b",
+		"command": "-asciidoc.toggleBold",
+		"when": "editorTextFocus && editorLangId == 'asciidoc'"
+	},
+	{
+		"key": "ctrl+alt+r",
+		"command": "-revealFileInOS",
+		"when": "!editorFocus"
+	},
+	{
+		"key": "ctrl+alt+r",
+		"command": "workbench.action.remote.showMenu"
+	},
+	{
+		"key": "ctrl+alt+o",
+		"command": "-workbench.action.remote.showMenu"
+	},
+	{
+		"key": "ctrl+alt+o",
+		"command": "outline.focus"
+	},
 ]

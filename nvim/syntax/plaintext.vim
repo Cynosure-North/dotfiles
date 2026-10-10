@@ -34,7 +34,7 @@ hi def link adjective Constant
 
 
 
-syn keyword weasel 
+syn keyword weasel
 
 many various very fairly several extremely exceedingly quite remarkably few surprisingly mostly largely huge tiny excellent interestingly significantly substantially clearly vast relatively completely
 big last low prove still thing very 24/7

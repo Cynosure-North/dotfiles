@@ -81,11 +81,12 @@ alias qmv='fd . --color=never -t f | qmv'
 alias vlc='cvlc --play-and-exit --fullscreen --no-video-title --mouse-hide-timeout 1 --stereo-mode 1'
 alias du='du -sh ./*'
 alias hist='fc -il'
-alias vi=nvim
-alias scr='cd $(mktemp -d)'
+alias -g vi=nvim
+alias -g scr='cd $(mktemp -d)'
 alias ,tv="nvim $HOME/Documents/Notes/Tv.txt"
 alias ,films="nvim $HOME/Documents/Notes/Films.txt"
 alias ,comics="nvim $HOME/Documents/Notes/Comics.txt"
+alias ,dreams="nvim $HOME/Documents/Dreams/$DATE.txt"
 alias ,diary="nvim $HOME/Documents/Diary/$DATE.txt"
 alias ,diary-1="nvim $HOME/Documents/Diary/$YESTERDATE.txt"
 alias ,health="nvim $HOME/Documents/Health/$DATE.txt"
@@ -93,9 +94,9 @@ alias ,health-1="nvim $HOME/Documents/Health/$YESTERDATE.txt"
 alias ,find="$HOME/Coding/Website/find_main"
 
 
-alias cpy=wl-copy
-alias pst=wl-paste
-alias opn=xdg-open
+alias -g cpy=wl-copy
+alias -g pst=wl-paste
+alias -g opn=xdg-open
 
 autoload -Uz bracketed-paste-magic		# Maybe can remove
 zle -N bracketed-paste bracketed-paste-magic

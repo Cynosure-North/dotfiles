@@ -64,6 +64,7 @@
         "microcontrollers",
         "polymetallic",
         "pushback",
+        "Rebecca",
         "unergonomic",
         "usecase"
     ],
@@ -165,4 +166,10 @@
     },
     "diffEditor.ignoreTrimWhitespace": false,
     "todo-tree.ripgrep.ripgrep": "/usr/bin/rg",
+    "workbench.activityBar.autoHide": true,
+    "workbench.activityBar.location": "top",
+    "apklab.apkSignerPath": "/home/north/.apklab/uber-apk-signer-1.3.0.jar",
+    "apklab.apktoolPath": "/home/north/.apklab/apktool_3.0.2.jar",
+    "apklab.smaliLspPath": "/home/north/.apklab/smali-lsp-1.5.0.jar",
+    "apklab.jadxDirPath": "/home/north/.apklab/jadx-1.5.6",
 }

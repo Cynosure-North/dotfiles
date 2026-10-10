@@ -59,6 +59,8 @@ opt.cpoptions:remove('_')				-- Fix cw inconsistency
 opt.cpoptions:append('M')				-- Ignore escaped brackets for matchpairs
 opt.splitright = true					-- New windows on the right
 opt.clipboard:append("unnamedplus")		-- Use system clipboard
+opt.formatoptions:append("ro")			-- Keep comments going
+
 -- Show indents
 opt.list = true
 opt.listchars = { tab = '  ', leadtab = '│ ', lead = '·', trail = '៖', nbsp = '␣', precedes = '←', extends= '→' }		-- TODO: use conceal or autocmd so it hides the ៖ with when typing
@@ -136,8 +138,8 @@ end
 
 -- Misc
 map("n", "zO", "zCzO")
-map("", "j", "gj", {remap = true})
-map("", "k", "gk", {remap = true})
+map({"n", "v"}, "j", "gj", {remap = true})
+map({"n", "v"}, "k", "gk", {remap = true})
 map("n", "q:", "")	-- Disable command line window (:<C-f> still works)
 map("n", "q/", "")
 map("n", "q?", "")

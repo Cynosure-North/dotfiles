@@ -9,14 +9,14 @@
 
 @media screen and (max-width:849px) {
 
-	/* Two row layout */
-	/* No clue what the 2px is from, but it's needed for symmetry */
-	#urlbar[breakout-extend] {
-		width: calc(100vw - 2 * var(--urlbar-margin-inline) + 2 * var(--urlbar-container-padding)) !important;
+	#urlbar-container {
+		height: var(--tabstrip-min-height) !important;
+		margin-left: 2px !important;
 	}
 
-	#nav-bar {
-		padding: 0 4px;
+	/* Two row layout */
+	#urlbar[popover-open] {
+		width: calc(100vw - 2 * var(--urlbar-margin-inline) - 8px) !important;
 	}
 }
 
@@ -29,7 +29,7 @@
 	}
 
 
-	#toolbar-menubar menu {
+	#main-menubar > menu {
 		font-size: 1.5em;
 	}
 
@@ -52,6 +52,9 @@
 		margin-inline: 0 !important;
 	}
 
+	#urlbar-container[popover-open] {
+		top: 5px !important;
+	}
 
 
 	@media screen and (min-width:850px) and (max-width:1324px) {
@@ -61,12 +64,12 @@
 			width: calc(100vw - var(--NavbarWidth) * 1vw) !important;
 		}
 
-		#nav-bardt {
+		#nav-bar {
 			width: calc(var(--NavbarWidth) * 1vw) !important;
 		}
 
-		#urlbar[breakout-extend] {
-			width: calc(var(--NavbarWidth) * 1vw - var(--urlbar-margin-inline)) !important;
+		#urlbar[popover-open] {
+			width: calc(var(--NavbarWidth) * 1vw - var(--urlbar-margin-inline) - 8px) !important;
 		}
 	}
 
@@ -81,8 +84,8 @@
 			width: calc(1325px / 100 * var(--NavbarWidth)) !important;
 		}
 
-		#urlbar[breakout-extend] {
-			width: calc(1325px / 100 * var(--NavbarWidth) - var(--urlbar-margin-inline)) !important;
+		#urlbar[popover-open] {
+			width: calc(1325px / 100 * var(--NavbarWidth) - var(--urlbar-margin-inline) - 8px) !important;
 		}
 	}
 }
@@ -90,6 +93,10 @@
 #PanelUI-button {
 	order: 1;
 	margin-left: 2px;
+}
+
+#nav-bar {
+	padding: 0 4px !important;
 }
 
 #nav-bar-customization-target {
@@ -164,7 +171,8 @@
 }
 
 #urlbar-container {
-	padding-left: 6px;
+	padding-left: 2px;
+	z-index: 1;
 }
 
 
@@ -303,24 +311,23 @@ html:hover:has(#browser:not(:hover)) {
 	box-shadow: none !important;
 }
 
-/* TODO: It seems like breakout-extend is always true, and yet it's an important
+/* TODO: It seems like popover-open is always true, and yet it's an important
  * selector, why? Is it just for specificity? */
 #urlbar:not(open) {
 	width: calc(var(--urlbar-width) - 12px) !important;
 }
 
-#urlbar[breakout-extend] {
+#urlbar[popover-open] {
 	position: fixed !important;
 	left: 8px !important;
-	top: 5px !important;
 }
 
-#urlbar[breakout-extend]>#urlbar-background {
+#urlbar[popover-open]>#urlbar-background {
 	background-color: Field !important;
 }
 
-#urlbar[breakout-extend] #tracking-protection-icon-container,
-#urlbar[breakout-extend] #identity-box {
+#urlbar[popover-open] #tracking-protection-icon-container,
+#urlbar[popover-open] #identity-box {
 	display: none !important;
 }
 
@@ -431,6 +438,7 @@ toolbarspring,
 /* Add to container dropdown */
 .urlbarView-button-menu,
 /* 3 dots in search results */
+#urlbar-go-button,
 .private-browsing-indicator-with-label,
 
 
